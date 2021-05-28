@@ -52,6 +52,8 @@ dependencies {
     //noinspection GradleDependency
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     implementation "androidx.activity:activity-ktx:$activityKtx"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
 
     //testing
     testImplementation "junit:junit:$junitVersion"

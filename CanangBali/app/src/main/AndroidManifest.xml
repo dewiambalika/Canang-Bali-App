@@ -9,6 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CanangBali">
+        <activity android:name=".ui.splash.SplashScreenActivity"></activity>
+        <activity android:name=".ui.information.upakara.detail.DetailUpakaraActivity" />
+        <activity android:name=".ui.information.upakara.UpakaraActivity" />
+        <activity android:name=".ui.information.shop.detail.DetailShopActivity" />
+        <activity android:name=".ui.information.shop.ShopActivity" />
+        <activity android:name=".ui.information.philosophy.PhilosophyActivity" />
+        <activity android:name=".ui.information.canang.detail.DetailCanangActivity" />
+        <activity android:name=".ui.information.canang.CanangActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
