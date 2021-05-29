@@ -14,7 +14,7 @@
     <string name="lihat_semua">lihat semua</string>
     <string name="toko">TOKO</string>
     <string name="canang_bali_apps">Canang Bali Apps</string>
-    <string name="dashboard_anda">Dashboard Anda</string>
+    <string name="dashboard_anda">Bookmark Anda</string>
     <string name="desc">Desc</string>
     <string name="instruksi">Instruksi</string>
     <string name="pilih_foto_dari_perangkat">Pilih Foto dari Perangkat</string>
@@ -40,4 +40,6 @@
     <string name="edit">Edit</string>
     <string name="first_title">canang</string>
     <string name="bali">bali</string>
+    <string name="filosofi_canang">Filosofi Canang</string>
+    <string name="lihat_detail">Lihat Detail</string>
 </resources>
