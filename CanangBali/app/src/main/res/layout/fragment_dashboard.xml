@@ -1,19 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/BgGreySoft"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <TextView
-        android:id="@+id/dashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dashboard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.dashboard.DashboardFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/card_about"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_with_shadow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <TextView
+            android:id="@+id/tv_about_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/canang_bali_apps"
+            android:textColor="@color/primaryColor"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/card_about"
+            app:layout_constraintTop_toTopOf="@+id/card_about" />
+
+        <TextView
+            android:id="@+id/tv_about_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/desc"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_about_title" />
+
+
+        <TextView
+            android:id="@+id/tv_title_dashboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/dashboard_anda"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_about" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/card_upakara"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_with_shadow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_dashboard"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <TextView
+            android:id="@+id/tv_dashboard_upakara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="35dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/upakara"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/card_upakara"
+            app:layout_constraintTop_toTopOf="@+id/card_upakara" />
+
+        <TextView
+            android:id="@+id/tv_see_upakara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/lihat_semua"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="@+id/tv_dashboard_upakara"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dashboard_upakara" />
+
+
+        <TextView
+            android:id="@+id/tv_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/item"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_number_upakara"
+            app:layout_constraintStart_toEndOf="@+id/tv_number_upakara" />
+
+        <TextView
+            android:id="@+id/tv_number_upakara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/_0"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="50sp"
+            app:layout_constraintStart_toStartOf="@+id/card_upakara"
+            app:layout_constraintTop_toTopOf="@+id/card_upakara" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/card_canang"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_with_shadow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_upakara"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <TextView
+            android:id="@+id/tv_dashboard_canang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="35dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/canang"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/card_canang"
+            app:layout_constraintTop_toTopOf="@+id/card_canang" />
+
+        <TextView
+            android:id="@+id/tv_see_canang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/lihat_semua"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="@+id/tv_dashboard_canang"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dashboard_canang" />
+
+        <TextView
+            android:id="@+id/tv_item2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/item"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_number_canang"
+            app:layout_constraintStart_toEndOf="@+id/tv_number_canang" />
+
+        <TextView
+            android:id="@+id/tv_number_canang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/_0"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="50sp"
+            app:layout_constraintStart_toStartOf="@+id/card_canang"
+            app:layout_constraintTop_toTopOf="@+id/card_canang" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/card_shop"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/background_with_shadow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_canang"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <TextView
+            android:id="@+id/tv_dashboard_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="65dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/toko"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/card_shop"
+            app:layout_constraintTop_toTopOf="@+id/card_shop" />
+
+        <TextView
+            android:id="@+id/tv_see_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/lihat_semua"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="@+id/tv_dashboard_shop"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dashboard_shop" />
+
+        <TextView
+            android:id="@+id/tv_item3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/item"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_number_shop"
+            app:layout_constraintStart_toEndOf="@+id/tv_number_shop" />
+
+        <TextView
+            android:id="@+id/tv_number_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/_0"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="50sp"
+            app:layout_constraintStart_toStartOf="@+id/card_shop"
+            app:layout_constraintTop_toTopOf="@+id/card_shop" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+
