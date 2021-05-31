@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/img_canang"
+            android:id="@+id/img_upakara"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginStart="32dp"
@@ -51,8 +51,8 @@
             android:background="@drawable/bg_circle"
             android:padding="8dp"
             android:src="@drawable/ic_share"
-            app:layout_constraintStart_toStartOf="@+id/img_canang"
-            app:layout_constraintTop_toBottomOf="@+id/img_canang"
+            app:layout_constraintStart_toStartOf="@+id/img_upakara"
+            app:layout_constraintTop_toBottomOf="@+id/img_upakara"
             tools:ignore="ContentDescription" />
 
         <ImageView
@@ -65,7 +65,7 @@
             android:padding="8dp"
             android:src="@drawable/ic_bookmark_outline"
             app:layout_constraintStart_toEndOf="@+id/btn_share"
-            app:layout_constraintTop_toBottomOf="@+id/img_canang"
+            app:layout_constraintTop_toBottomOf="@+id/img_upakara"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -82,10 +82,10 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_canang" />
+            app:layout_constraintTop_toBottomOf="@+id/img_upakara" />
 
         <TextView
-            android:id="@+id/desc_function"
+            android:id="@+id/tv_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

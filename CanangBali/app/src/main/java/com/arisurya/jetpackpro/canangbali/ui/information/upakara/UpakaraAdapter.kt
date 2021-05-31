@@ -1,10 +1,12 @@
 package com.arisurya.jetpackpro.canangbali.ui.information.upakara
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.UpakaraEntity
 import com.arisurya.jetpackpro.canangbali.databinding.ItemUpakaraBinding
+import com.arisurya.jetpackpro.canangbali.ui.information.upakara.detail.DetailUpakaraActivity
 import com.bumptech.glide.Glide
 
 class UpakaraAdapter : RecyclerView.Adapter<UpakaraAdapter.UpakaraViewHolder>() {
@@ -44,7 +46,9 @@ class UpakaraAdapter : RecyclerView.Adapter<UpakaraAdapter.UpakaraViewHolder>() 
                     .into(imgUpakara)
 
                 itemView.setOnClickListener {
-                    return@setOnClickListener
+                    val intent = Intent(itemView.context, DetailUpakaraActivity::class.java)
+                    intent.putExtra(DetailUpakaraActivity.EXTRA_UPAKARA, upakara.upakaraId)
+                    itemView.context.startActivity(intent)
                 }
             }
         }
