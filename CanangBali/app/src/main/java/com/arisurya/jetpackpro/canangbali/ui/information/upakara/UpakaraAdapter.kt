@@ -47,7 +47,7 @@ class UpakaraAdapter : RecyclerView.Adapter<UpakaraAdapter.UpakaraViewHolder>() 
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailUpakaraActivity::class.java)
-                    intent.putExtra(DetailUpakaraActivity.EXTRA_UPAKARA, upakara.upakaraId)
+                    intent.putExtra(DetailUpakaraActivity.EXTRA_UPAKARA, upakara.upakaraId.toString())
                     itemView.context.startActivity(intent)
                 }
             }

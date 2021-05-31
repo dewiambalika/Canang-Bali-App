@@ -1,10 +1,13 @@
 package com.arisurya.jetpackpro.canangbali.ui.information.shop
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.ShopEntity
 import com.arisurya.jetpackpro.canangbali.databinding.ItemShopBinding
+import com.arisurya.jetpackpro.canangbali.ui.information.canang.detail.DetailCanangActivity
+import com.arisurya.jetpackpro.canangbali.ui.information.shop.detail.DetailShopActivity
 import com.bumptech.glide.Glide
 
 class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
@@ -44,7 +47,9 @@ class ShopAdapter : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
                     .into(imgShop)
 
                 itemView.setOnClickListener {
-                    return@setOnClickListener
+                    val intent = Intent(itemView.context, DetailShopActivity::class.java)
+                    intent.putExtra(DetailShopActivity.EXTRA_SHOP, shop.shopId.toString())
+                    itemView.context.startActivity(intent)
                 }
             }
         }

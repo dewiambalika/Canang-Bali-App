@@ -1,5 +1,6 @@
 package com.arisurya.jetpackpro.canangbali.ui.information
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,11 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arisurya.jetpackpro.canangbali.databinding.FragmentInformationBinding
+import com.arisurya.jetpackpro.canangbali.ui.information.canang.CanangActivity
 import com.arisurya.jetpackpro.canangbali.ui.information.canang.CanangAdapter
+import com.arisurya.jetpackpro.canangbali.ui.information.philosophy.PhilosophyActivity
+import com.arisurya.jetpackpro.canangbali.ui.information.shop.ShopActivity
 import com.arisurya.jetpackpro.canangbali.ui.information.shop.ShopAdapter
+import com.arisurya.jetpackpro.canangbali.ui.information.upakara.UpakaraActivity
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.UpakaraAdapter
 
-class InformationFragment : Fragment() {
+class InformationFragment : Fragment(), View.OnClickListener {
 
     private lateinit var fragmentInformationBinding: FragmentInformationBinding
 
@@ -61,7 +66,32 @@ class InformationFragment : Fragment() {
                 adapter = shopAdapter
             }
 
+            fragmentInformationBinding.apply {
+                tvSeeAllUpakara.setOnClickListener(this@InformationFragment)
+                tvSeeAllCanang.setOnClickListener(this@InformationFragment)
+                tvSeeAllShop.setOnClickListener(this@InformationFragment)
+                btnDetailPhi.setOnClickListener(this@InformationFragment)
+            }
+
         }
+    }
+
+    override fun onClick(v: View?) {
+       when(v){
+           fragmentInformationBinding.tvSeeAllUpakara -> {
+               startActivity(Intent(Intent(activity, UpakaraActivity::class.java)))
+           }
+           fragmentInformationBinding.tvSeeAllCanang -> {
+               startActivity(Intent(Intent(activity, CanangActivity::class.java)))
+           }
+           fragmentInformationBinding.tvSeeAllShop -> {
+               startActivity(Intent(Intent(activity, ShopActivity::class.java)))
+           }
+           fragmentInformationBinding.btnDetailPhi->{
+               startActivity(Intent(Intent(activity, PhilosophyActivity::class.java)))
+           }
+
+       }
     }
 
 }

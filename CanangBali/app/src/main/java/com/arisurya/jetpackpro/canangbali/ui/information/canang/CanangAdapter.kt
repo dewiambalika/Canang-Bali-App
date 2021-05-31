@@ -1,10 +1,13 @@
 package com.arisurya.jetpackpro.canangbali.ui.information.canang
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.CanangEntity
 import com.arisurya.jetpackpro.canangbali.databinding.ItemCanangBinding
+import com.arisurya.jetpackpro.canangbali.ui.information.canang.detail.DetailCanangActivity
+import com.arisurya.jetpackpro.canangbali.ui.information.upakara.detail.DetailUpakaraActivity
 import com.bumptech.glide.Glide
 
 class CanangAdapter : RecyclerView.Adapter<CanangAdapter.CanangViewHolder>() {
@@ -44,7 +47,9 @@ class CanangAdapter : RecyclerView.Adapter<CanangAdapter.CanangViewHolder>() {
                     .into(imgCanang)
 
                 itemView.setOnClickListener {
-                    return@setOnClickListener
+                    val intent = Intent(itemView.context, DetailCanangActivity::class.java)
+                    intent.putExtra(DetailCanangActivity.EXTRA_CANANG, canang.canangId.toString())
+                    itemView.context.startActivity(intent)
                 }
             }
         }
