@@ -11,6 +11,7 @@ import com.arisurya.jetpackpro.canangbali.databinding.ActivityDetailCanangBindin
 import com.arisurya.jetpackpro.canangbali.databinding.ActivityDetailUpakaraBinding
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.detail.DetailUpakaraActivity
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.detail.DetailUpakaraViewModel
+import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 
 class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
@@ -27,14 +28,33 @@ class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
         detailCanangBinding = ActivityDetailCanangBinding.inflate(layoutInflater)
         setContentView(detailCanangBinding.root)
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCanangViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(this, factory)[DetailCanangViewModel::class.java]
 
         val extras = intent.extras
+        showProgressBar(true)
         if(extras!=null){
             val canangId = extras.getString(EXTRA_CANANG)
             if(canangId!=null){
                 viewModel.setSelectedCanang(canangId)
-                populateCanang(viewModel.getDetailCanang())
+                viewModel.getDetailCanang().observe(this, {canang->
+                    if(canang!=null){
+                        showProgressBar(false)
+                        populateCanang(canang)
+                        shareMessage ="""
+                        [INFO CANANG]
+                        Judul            : ${canang.title}
+                        Fungsi           : 
+                        ${canang.function}            
+                        Cara pembuatan   : 
+                        ${canang.make}
+                        
+                        Created by Canang Bali Team            
+                    """.trimIndent()
+                    }
+
+                })
+
             }
         }
 
@@ -56,17 +76,6 @@ class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun shareDetailCanang() {
-        val data = viewModel.getDetailCanang()
-        shareMessage ="""
-            [INFO CANANG]
-            Judul            : ${data.title}
-            Fungsi           : 
-            ${data.function}            
-            Cara pembuatan   : 
-            ${data.make}
-            
-            Created by Canang Bali Team            
-        """.trimIndent()
         val mimeType = "text/plain"
         ShareCompat.IntentBuilder
             .from(this)
@@ -83,5 +92,12 @@ class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
            }
        }
 
+    }
+    private fun showProgressBar(state : Boolean){
+        if(state){
+            detailCanangBinding.progressBar.visibility = View.VISIBLE
+        }else{
+            detailCanangBinding.progressBar.visibility = View.GONE
+        }
     }
 }

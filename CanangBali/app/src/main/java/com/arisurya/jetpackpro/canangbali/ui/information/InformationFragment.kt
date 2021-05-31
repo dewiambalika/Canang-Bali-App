@@ -17,6 +17,7 @@ import com.arisurya.jetpackpro.canangbali.ui.information.shop.ShopActivity
 import com.arisurya.jetpackpro.canangbali.ui.information.shop.ShopAdapter
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.UpakaraActivity
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.UpakaraAdapter
+import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
 
 class InformationFragment : Fragment(), View.OnClickListener {
 
@@ -36,31 +37,46 @@ class InformationFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
+            val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(
                 this,
-                ViewModelProvider.NewInstanceFactory()
+                factory
             )[InformationViewModel::class.java]
-            val upakara = viewModel.getUpakara()
+
 
             val upakaraAdapter = UpakaraAdapter()
-            upakaraAdapter.setUpakara(upakara)
+            showProgressBar(true)
+            viewModel.getUpakara().observe(viewLifecycleOwner, {upakara->
+                if (upakara!=null){
+                    showProgressBar(false)
+                    upakaraAdapter.setUpakara(upakara)
+                    upakaraAdapter.notifyDataSetChanged()
+                }
+            })
+
             with(fragmentInformationBinding.rvUpakara) {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 setHasFixedSize(true)
                 adapter = upakaraAdapter
             }
 
-            val canang = viewModel.getCanang()
+
             val canangAdapter = CanangAdapter()
-            canangAdapter.setCanang(canang)
+            viewModel.getCanang().observe(viewLifecycleOwner, {canang->
+                canangAdapter.setCanang(canang)
+                canangAdapter.notifyDataSetChanged()
+            })
             with(fragmentInformationBinding.rvCanang) {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 adapter = canangAdapter
             }
 
-            val shop = viewModel.getShop()
+
             val shopAdapter = ShopAdapter()
-            shopAdapter.setShop(shop)
+            viewModel.getShop().observe(viewLifecycleOwner, {shop->
+                shopAdapter.setShop(shop)
+                shopAdapter.notifyDataSetChanged()
+            })
             with(fragmentInformationBinding.rvShop) {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 adapter = shopAdapter
@@ -92,6 +108,14 @@ class InformationFragment : Fragment(), View.OnClickListener {
            }
 
        }
+    }
+
+    private fun showProgressBar(state : Boolean){
+        if(state){
+            fragmentInformationBinding.progressBar.visibility = View.VISIBLE
+        }else{
+            fragmentInformationBinding.progressBar.visibility = View.GONE
+        }
     }
 
 }

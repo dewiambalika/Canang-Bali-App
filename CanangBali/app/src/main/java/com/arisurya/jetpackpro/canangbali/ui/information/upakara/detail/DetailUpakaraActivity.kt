@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.arisurya.jetpackpro.canangbali.R
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.UpakaraEntity
 import com.arisurya.jetpackpro.canangbali.databinding.ActivityDetailUpakaraBinding
+import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 import kotlin.concurrent.fixedRateTimer
 
@@ -19,19 +20,36 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var detailUpakaraBinding: ActivityDetailUpakaraBinding
     private lateinit var viewModel: DetailUpakaraViewModel
     private lateinit var shareMessage : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detailUpakaraBinding = ActivityDetailUpakaraBinding.inflate(layoutInflater)
         setContentView(detailUpakaraBinding.root)
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailUpakaraViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(this, factory)[DetailUpakaraViewModel::class.java]
 
         val extras = intent.extras
         if(extras!=null){
             val upakaraId = extras.getString(EXTRA_UPAKARA)
+            showProgressBar(true)
             if(upakaraId!=null){
                 viewModel.setSelectedUpakara(upakaraId)
-                populateUpakara(viewModel.getDetailUpakara())
+                viewModel.getDetailUpakara().observe(this, {upakara->
+                    if (upakara!=null){
+                        showProgressBar(false)
+                        populateUpakara(upakara)
+                        shareMessage = """
+                        [INFO UPAKARA]
+                        Judul      : ${upakara.title}
+                        Penjelasan : 
+                        ${upakara.desc}
+                        
+                        Created by Canang Bali Team            
+                    """.trimIndent()
+                    }
+                })
+
             }
         }
 
@@ -58,15 +76,7 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun shareDetailUpakara() {
-        val data = viewModel.getDetailUpakara()
-        shareMessage ="""
-            [INFO UPAKARA]
-            Judul      : ${data.title}
-            Penjelasan : 
-            ${data.desc}
-            
-            Created by Canang Bali Team            
-        """.trimIndent()
+
         val mimeType = "text/plain"
         ShareCompat.IntentBuilder
             .from(this)
@@ -74,5 +84,13 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
             .setChooserTitle("Share via")
             .setText(shareMessage)
             .startChooser()
+    }
+
+    private fun showProgressBar(state : Boolean){
+        if(state){
+            detailUpakaraBinding.progressBar.visibility = View.VISIBLE
+        }else{
+            detailUpakaraBinding.progressBar.visibility = View.GONE
+        }
     }
 }

@@ -1,0 +1,32 @@
+{
+  "canang": [
+    {
+      "canangId": 1,
+      "title": "Canang Sari",
+      "imgPath": "",
+      "function": "Lorem ipsum",
+      "make": "Lorem ipsum"  
+    },
+    {
+      "canangId": 2,
+      "title": "Canang Goak",
+      "imgPath": "",
+      "function": "Lorem ipsum",
+      "make": "Lorem ipsum"  
+    },
+    {
+      "canangId": 3,
+      "title": "Canang Ituk-ituk",
+      "imgPath": "",
+      "function": "Lorem ipsum",
+      "make": "Lorem ipsum"  
+    },  
+    {
+      "canangId": 4,
+      "title": "Canang Genten",
+      "imgPath": "",
+      "function": "Lorem ipsum",
+      "make": "Lorem ipsum"  
+    }    
+  ]
+}

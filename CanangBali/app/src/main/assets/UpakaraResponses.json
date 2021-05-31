@@ -1,0 +1,34 @@
+{
+  "upakara": [
+    {
+      "upakaraId": 1,
+      "title": "Nyepi",
+      "imgPath": "",
+      "desc": "Lorem ipsum"
+    },
+    {
+      "upakaraId": 2,
+      "title": "Galungan",
+      "imgPath": "",
+      "desc": "Lorem ipsum"
+    },
+    {
+      "upakaraId": 3,
+      "title": "Kuningan",
+      "imgPath": "",
+      "desc": "Lorem ipsum"
+    },
+    {
+      "upakaraId": 4,
+      "title": "Purnama",
+      "imgPath": "",
+      "desc": "Lorem ipsum"
+    },
+    {
+      "upakaraId": 5,
+      "title": "Tilem",
+      "imgPath": "",
+      "desc": "Lorem ipsum"
+    }   
+  ]
+}

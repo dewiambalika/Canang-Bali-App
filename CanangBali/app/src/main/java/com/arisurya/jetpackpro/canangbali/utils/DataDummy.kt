@@ -14,7 +14,7 @@ object DataDummy {
             UpakaraEntity(
                 1,
                 "Nyepi",
-                "https://drive.google.com/drive/u/0/folders/12e-92gs-zZqb_lTpCB6yHMBQNG1ltEwz",
+                "",
                 "Lorem ipsum",
             )
         )
@@ -22,8 +22,8 @@ object DataDummy {
         upakara.add(
             UpakaraEntity(
                 2,
-                "Calungan",
-                "https://drive.google.com/drive/u/0/folders/12e-92gs-zZqb_lTpCB6yHMBQNG1ltEwz",
+                "Galungan",
+                "",
                 "Lorem ipsum",
             )
         )
@@ -32,7 +32,7 @@ object DataDummy {
             UpakaraEntity(
                 3,
                 "Kuningan",
-                "https://drive.google.com/drive/u/0/folders/12e-92gs-zZqb_lTpCB6yHMBQNG1ltEwz",
+                "",
                 "Lorem ipsum",
             )
         )
@@ -41,7 +41,7 @@ object DataDummy {
             UpakaraEntity(
                 4,
                 "Purnama",
-                "https://drive.google.com/drive/u/0/folders/12e-92gs-zZqb_lTpCB6yHMBQNG1ltEwz",
+                "",
                 "Lorem ipsum",
             )
         )
@@ -50,7 +50,7 @@ object DataDummy {
             UpakaraEntity(
                 5,
                 "Tilem",
-                "https://drive.google.com/drive/u/0/folders/12e-92gs-zZqb_lTpCB6yHMBQNG1ltEwz",
+                "",
                 "Lorem ipsum",
             )
         )

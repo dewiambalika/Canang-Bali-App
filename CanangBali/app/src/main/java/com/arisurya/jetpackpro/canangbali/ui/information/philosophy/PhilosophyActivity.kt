@@ -6,7 +6,9 @@ import android.view.View
 import androidx.core.app.ShareCompat
 import androidx.lifecycle.ViewModelProvider
 import com.arisurya.jetpackpro.canangbali.R
+import com.arisurya.jetpackpro.canangbali.data.source.local.entity.PhilosophyEntity
 import com.arisurya.jetpackpro.canangbali.databinding.ActivityPhilosophyBinding
+import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 
 class PhilosophyActivity : AppCompatActivity(), View.OnClickListener {
@@ -18,20 +20,19 @@ class PhilosophyActivity : AppCompatActivity(), View.OnClickListener {
         philosophyBinding = ActivityPhilosophyBinding.inflate(layoutInflater)
         setContentView(philosophyBinding.root)
 
+        val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            factory
         )[PhilosophyViewModel::class.java]
-        val philosophy = viewModel.getPhilosophy()
-        philosophyBinding.apply {
-            tvTitleDetailPhi.text = philosophy.title
-            tvDescPhi.text = philosophy.desc
-            btnShare.setOnClickListener(this@PhilosophyActivity)
-            Glide.with(this@PhilosophyActivity)
-                .load(philosophy.imgPath)
-                .into(imgPhi)
+        showProgressBar(true)
+        viewModel.getPhilosophy().observe(this@PhilosophyActivity, {data->
+            if(data!=null){
+                showProgressBar(false)
+                populatePhilosophy(data)
+            }
+        })
 
-        }
     }
 
     override fun onClick(v: View?) {
@@ -43,9 +44,22 @@ class PhilosophyActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    private fun populatePhilosophy(philosophy : PhilosophyEntity){
+        philosophyBinding.apply {
+            tvTitleDetailPhi.text = philosophy.title
+            tvDescPhi.text = philosophy.desc
+            btnShare.setOnClickListener(this@PhilosophyActivity)
+            Glide.with(this@PhilosophyActivity)
+                .load(philosophy.imgPath)
+                .into(imgPhi)
+
+        }
+    }
+
     private fun sharePhilosophy() {
-        val data = viewModel.getPhilosophy()
-        val shareMessage = """
+        lateinit var shareMessage: String
+       viewModel.getPhilosophy().observe(this@PhilosophyActivity, {data->
+           shareMessage = """
             [INFO FILOSOFI CANANG]
             Judul      : ${data.title}
             Penjelasan : 
@@ -53,12 +67,21 @@ class PhilosophyActivity : AppCompatActivity(), View.OnClickListener {
             
             Created by Canang Bali Team  
         """.trimIndent()
-        val mimeType = "text/plain"
-        ShareCompat.IntentBuilder
-            .from(this)
-            .setType(mimeType)
-            .setChooserTitle("Share via")
-            .setText(shareMessage)
-            .startChooser()
+           val mimeType = "text/plain"
+           ShareCompat.IntentBuilder
+               .from(this@PhilosophyActivity)
+               .setType(mimeType)
+               .setChooserTitle("Share via")
+               .setText(shareMessage)
+               .startChooser()
+       })
+    }
+
+    private fun showProgressBar(state : Boolean){
+        if(state){
+            philosophyBinding.progressBar.visibility = View.VISIBLE
+        }else{
+            philosophyBinding.progressBar.visibility = View.GONE
+        }
     }
 }

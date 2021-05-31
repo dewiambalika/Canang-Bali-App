@@ -1,0 +1,50 @@
+{
+  "shop": [
+    {
+      "shopId": 1,
+      "name": "Toko 1",
+      "imgPath": "",
+      "location": "Denpasar",
+      "tlp": "089999999",
+      "product": "Canang Sari, Canang Goak",
+      "desc": "Melayani semua jenis canang"   
+    },
+    {
+      "shopId": 2,
+      "name": "Toko 2",
+      "imgPath": "",
+      "location": "Gianyar",
+      "tlp": "089999999",
+      "product": "Canang Sari, Canang Goak",
+      "desc": "Melayani semua jenis canang"   
+    },
+    {
+      "shopId": 3,
+      "name": "Toko 3",
+      "imgPath": "",
+      "location": "Denpasar",
+      "tlp": "089999999",
+      "product": "Canang Sari, Canang Goak",
+      "desc": "Melayani semua jenis canang"   
+    },
+    {
+      "shopId": 4,
+      "name": "Toko 4",
+      "imgPath": "",
+      "location": "Badung",
+      "tlp": "089999999",
+      "product": "Canang Sari, Canang Goak",
+      "desc": "Melayani semua jenis canang"   
+    },
+    {
+      "shopId": 5,
+      "name": "Toko 5",
+      "imgPath": "",
+      "location": "Klungkung",
+      "tlp": "089999999",
+      "product": "Canang Sari, Canang Goak",
+      "desc": "Melayani semua jenis canang"   
+    }
+  
+  ]
+}
