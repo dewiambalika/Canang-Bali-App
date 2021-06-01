@@ -3,12 +3,14 @@ package com.arisurya.jetpackpro.canangbali.ui.information.upakara.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ShareCompat
 import androidx.lifecycle.ViewModelProvider
 import com.arisurya.jetpackpro.canangbali.R
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.UpakaraEntity
 import com.arisurya.jetpackpro.canangbali.databinding.ActivityDetailUpakaraBinding
 import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
+import com.arisurya.jetpackpro.canangbali.vo.Status
 import com.bumptech.glide.Glide
 import kotlin.concurrent.fixedRateTimer
 
@@ -35,18 +37,28 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
             showProgressBar(true)
             if(upakaraId!=null){
                 viewModel.setSelectedUpakara(upakaraId)
-                viewModel.getDetailUpakara().observe(this, {upakara->
+                viewModel.detailUpakara.observe(this, {upakara->
                     if (upakara!=null){
-                        showProgressBar(false)
-                        populateUpakara(upakara)
-                        shareMessage = """
-                        [INFO UPAKARA]
-                        Judul      : ${upakara.title}
-                        Penjelasan : 
-                        ${upakara.desc}
-                        
-                        Created by Canang Bali Team            
-                    """.trimIndent()
+                        when(upakara.status){
+                            Status.LOADING -> showProgressBar(true)
+                            Status.SUCCESS ->{
+                                showProgressBar(false)
+                                populateUpakara(upakara.data)
+                                shareMessage = """
+                                    [INFO UPAKARA]
+                                    Judul      : ${upakara.data?.title}
+                                    Penjelasan : 
+                                    ${upakara.data?.desc}
+                                    
+                                    Created by Canang Bali Team            
+                                """.trimIndent()
+                            }
+                            Status.ERROR -> {
+                                showProgressBar(false)
+                                Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
                     }
                 })
 
@@ -55,12 +67,12 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun populateUpakara(upakara: UpakaraEntity) {
+    private fun populateUpakara(upakara: UpakaraEntity?) {
         detailUpakaraBinding.apply {
-            tvTitleDetailUpakara.text = upakara.title
-            tvDesc.text = upakara.desc
+            tvTitleDetailUpakara.text = upakara?.title
+            tvDesc.text = upakara?.desc
             Glide.with(this@DetailUpakaraActivity)
-                .load(upakara.imgPath)
+                .load(upakara?.imgPath)
                 .into(imgUpakara)
             btnShare.setOnClickListener(this@DetailUpakaraActivity)
         }

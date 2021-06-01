@@ -3,6 +3,7 @@ package com.arisurya.jetpackpro.canangbali.ui.information.canang
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import com.arisurya.jetpackpro.canangbali.databinding.ActivityCanangBinding
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.UpakaraAdapter
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.UpakaraViewModel
 import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
+import com.arisurya.jetpackpro.canangbali.vo.Status
 
 class CanangActivity : AppCompatActivity() {
     private lateinit var canangBinding : ActivityCanangBinding
@@ -27,9 +29,19 @@ class CanangActivity : AppCompatActivity() {
         showProgressBar(true)
         viewModel.getCanang().observe(this, {canang->
             if(canang!=null){
-                showProgressBar(false)
-                adapter.setCanang(canang)
-                adapter.notifyDataSetChanged()
+                when(canang.status){
+                    Status.LOADING -> showProgressBar(true)
+                    Status.SUCCESS -> {
+                        showProgressBar(false)
+                        adapter.setCanang(canang.data)
+                        adapter.notifyDataSetChanged()
+                    }
+                    Status.ERROR -> {
+                        showProgressBar(false)
+                        Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
             }
 
         })

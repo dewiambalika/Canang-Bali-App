@@ -3,12 +3,14 @@ package com.arisurya.jetpackpro.canangbali.ui.information.shop
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arisurya.jetpackpro.canangbali.R
 import com.arisurya.jetpackpro.canangbali.databinding.ActivityShopBinding
 import com.arisurya.jetpackpro.canangbali.ui.information.shop.detail.DetailShopViewModel
 import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
+import com.arisurya.jetpackpro.canangbali.vo.Status
 
 class ShopActivity : AppCompatActivity() {
     private lateinit var shopBinding : ActivityShopBinding
@@ -28,9 +30,19 @@ class ShopActivity : AppCompatActivity() {
         showProgressBar(true)
         viewModel.getShop().observe(this, {shop->
             if (shop!=null){
-                showProgressBar(false)
-                adapter.setShop(shop)
-                adapter.notifyDataSetChanged()
+                when(shop.status){
+                    Status.LOADING -> showProgressBar(true)
+                    Status.SUCCESS->{
+                        showProgressBar(false)
+                        adapter.setShop(shop.data)
+                        adapter.notifyDataSetChanged()
+                    }
+                    Status.ERROR ->{
+                        showProgressBar(false)
+                        Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
             }
 
         })

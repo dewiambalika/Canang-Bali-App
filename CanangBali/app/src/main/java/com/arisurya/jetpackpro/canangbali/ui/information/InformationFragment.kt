@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ import com.arisurya.jetpackpro.canangbali.ui.information.shop.ShopAdapter
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.UpakaraActivity
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.UpakaraAdapter
 import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
+import com.arisurya.jetpackpro.canangbali.vo.Status
 
 class InformationFragment : Fragment(), View.OnClickListener {
 
@@ -48,9 +50,18 @@ class InformationFragment : Fragment(), View.OnClickListener {
             showProgressBar(true)
             viewModel.getUpakara().observe(viewLifecycleOwner, {upakara->
                 if (upakara!=null){
-                    showProgressBar(false)
-                    upakaraAdapter.setUpakara(upakara)
-                    upakaraAdapter.notifyDataSetChanged()
+                    when(upakara.status){
+                        Status.LOADING -> showProgressBar(true)
+                        Status.SUCCESS ->{
+                            showProgressBar(false)
+                            upakaraAdapter.setUpakara(upakara.data)
+                            upakaraAdapter.notifyDataSetChanged()
+                        }
+                        Status.ERROR -> {
+                            showProgressBar(false)
+                            Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             })
 
@@ -63,23 +74,47 @@ class InformationFragment : Fragment(), View.OnClickListener {
 
             val canangAdapter = CanangAdapter()
             viewModel.getCanang().observe(viewLifecycleOwner, {canang->
-                canangAdapter.setCanang(canang)
-                canangAdapter.notifyDataSetChanged()
+                when(canang.status){
+                    Status.LOADING -> showProgressBar(true)
+                    Status.SUCCESS->{
+                        showProgressBar(false)
+                        canangAdapter.setCanang(canang.data)
+                        canangAdapter.notifyDataSetChanged()
+                    }
+                    Status.ERROR -> {
+                        showProgressBar(false)
+                        Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
             })
             with(fragmentInformationBinding.rvCanang) {
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                setHasFixedSize(true)
                 adapter = canangAdapter
             }
 
 
             val shopAdapter = ShopAdapter()
             viewModel.getShop().observe(viewLifecycleOwner, {shop->
-                shopAdapter.setShop(shop)
-                shopAdapter.notifyDataSetChanged()
+                when(shop.status){
+                    Status.LOADING -> showProgressBar(true)
+                    Status.SUCCESS ->{
+                        showProgressBar(false)
+                        shopAdapter.setShop(shop.data)
+                        shopAdapter.notifyDataSetChanged()
+                    }
+                    Status.ERROR ->{
+                        showProgressBar(false)
+                        Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
             })
             with(fragmentInformationBinding.rvShop) {
-                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                adapter = shopAdapter
+                this.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                setHasFixedSize(true)
+                this.adapter = shopAdapter
             }
 
             fragmentInformationBinding.apply {

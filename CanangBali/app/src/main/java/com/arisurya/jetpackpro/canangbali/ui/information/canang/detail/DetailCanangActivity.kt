@@ -3,6 +3,7 @@ package com.arisurya.jetpackpro.canangbali.ui.information.canang.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ShareCompat
 import androidx.lifecycle.ViewModelProvider
 import com.arisurya.jetpackpro.canangbali.R
@@ -12,6 +13,7 @@ import com.arisurya.jetpackpro.canangbali.databinding.ActivityDetailUpakaraBindi
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.detail.DetailUpakaraActivity
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.detail.DetailUpakaraViewModel
 import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
+import com.arisurya.jetpackpro.canangbali.vo.Status
 import com.bumptech.glide.Glide
 
 class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
@@ -37,20 +39,30 @@ class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
             val canangId = extras.getString(EXTRA_CANANG)
             if(canangId!=null){
                 viewModel.setSelectedCanang(canangId)
-                viewModel.getDetailCanang().observe(this, {canang->
+                viewModel.detailCanang.observe(this, {canang->
                     if(canang!=null){
-                        showProgressBar(false)
-                        populateCanang(canang)
-                        shareMessage ="""
-                        [INFO CANANG]
-                        Judul            : ${canang.title}
-                        Fungsi           : 
-                        ${canang.function}            
-                        Cara pembuatan   : 
-                        ${canang.make}
-                        
-                        Created by Canang Bali Team            
-                    """.trimIndent()
+                        when(canang.status){
+                            Status.LOADING -> showProgressBar(true)
+                            Status.SUCCESS ->{
+                                showProgressBar(false)
+                                populateCanang(canang.data)
+                                shareMessage ="""
+                                    [INFO CANANG]
+                                    Judul            : ${canang.data?.title}
+                                    Fungsi           : 
+                                    ${canang.data?.function}            
+                                    Cara pembuatan   : 
+                                    ${canang.data?.make}
+                                    
+                                    Created by Canang Bali Team            
+                                """.trimIndent()
+                            }
+                            Status.ERROR ->{
+                                showProgressBar(false)
+                                Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
                     }
 
                 })
@@ -61,14 +73,14 @@ class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun populateCanang(data: CanangEntity) {
+    private fun populateCanang(data: CanangEntity?) {
 
         detailCanangBinding.apply {
-            tvTitleDetailCanang.text = data.title
-            descFunction.text = data.function
-            descStep.text = data.make
+            tvTitleDetailCanang.text = data?.title
+            descFunction.text = data?.function
+            descStep.text = data?.make
             Glide.with(this@DetailCanangActivity)
-                .load(data.imgPath)
+                .load(data?.imgPath)
                 .into(imgCanang)
             btnShare.setOnClickListener(this@DetailCanangActivity)
         }

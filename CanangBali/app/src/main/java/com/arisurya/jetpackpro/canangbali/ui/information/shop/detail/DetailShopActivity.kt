@@ -5,10 +5,12 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.ShopEntity
 import com.arisurya.jetpackpro.canangbali.databinding.ActivityDetailShopBinding
 import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
+import com.arisurya.jetpackpro.canangbali.vo.Status
 import com.bumptech.glide.Glide
 
 class DetailShopActivity : AppCompatActivity(), View.OnClickListener {
@@ -34,11 +36,21 @@ class DetailShopActivity : AppCompatActivity(), View.OnClickListener {
             showProgressBar(true)
             if(shopId!=null){
                 viewModel.setSelectedShop(shopId)
-                viewModel.getDetailShop().observe(this, {shop->
+                viewModel.detailShop.observe(this, {shop->
                     if (shop!=null){
-                        showProgressBar(false)
-                        populateShop(shop)
-                        telp = shop.tlp
+                        when(shop.status){
+                            Status.LOADING -> showProgressBar(true)
+                            Status.SUCCESS -> {
+                                showProgressBar(false)
+                                populateShop(shop.data)
+                                telp = shop.data?.tlp ?: ""
+                            }
+                            Status.ERROR ->{
+                                showProgressBar(false)
+                                Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
                     }
 
                 })
@@ -47,15 +59,15 @@ class DetailShopActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun populateShop(shop: ShopEntity) {
+    private fun populateShop(shop: ShopEntity?) {
         detailShopBinding.apply {
-            tvShopName.text = shop.name
-            tvShopLoc.text = shop.location
-            tvShopTlp.text = shop.tlp
-            tvProductDesc.text = shop.product
-            tvDesc.text = shop.desc
+            tvShopName.text = shop?.name
+            tvShopLoc.text = shop?.location
+            tvShopTlp.text = shop?.tlp
+            tvProductDesc.text = shop?.product
+            tvDesc.text = shop?.desc
             Glide.with(this@DetailShopActivity)
-                .load(shop.imgPath)
+                .load(shop?.imgPath)
                 .into(imgShop)
 
             btnTlp.setOnClickListener(this@DetailShopActivity)

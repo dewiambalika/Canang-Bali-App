@@ -2,33 +2,50 @@ package com.arisurya.jetpackpro.canangbali.data.source
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.arisurya.jetpackpro.canangbali.data.source.local.LocalDataSource
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.CanangEntity
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.PhilosophyEntity
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.ShopEntity
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.UpakaraEntity
+import com.arisurya.jetpackpro.canangbali.data.source.remote.ApiResponse
 import com.arisurya.jetpackpro.canangbali.data.source.remote.RemoteDataSource
 import com.arisurya.jetpackpro.canangbali.data.source.remote.response.CanangResponse
 import com.arisurya.jetpackpro.canangbali.data.source.remote.response.PhilosophyResponse
 import com.arisurya.jetpackpro.canangbali.data.source.remote.response.ShopResponse
 import com.arisurya.jetpackpro.canangbali.data.source.remote.response.UpakaraResponse
+import com.arisurya.jetpackpro.canangbali.utils.AppExecutors
+import com.arisurya.jetpackpro.canangbali.vo.Resource
 
 
-class CanangRepository private constructor(private val remoteDataSource: RemoteDataSource) :
+class CanangRepository private constructor(
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
+    private val appExecutors: AppExecutors
+) :
     CanangDataSource {
 
     companion object {
         @Volatile
         private var instance: CanangRepository? = null
-        fun getInstance(remoteData: RemoteDataSource): CanangRepository =
+        fun getInstance(remoteData: RemoteDataSource, localData: LocalDataSource, appExecutors: AppExecutors): CanangRepository =
             instance ?: synchronized(this) {
-                instance ?: CanangRepository(remoteData).apply { instance = this }
+                instance ?: CanangRepository(remoteData, localData, appExecutors).apply { instance = this }
             }
     }
 
-    override fun getCanang(): LiveData<List<CanangEntity>> {
-        val canangResults = MutableLiveData<List<CanangEntity>>()
-        remoteDataSource.getCanang(object : RemoteDataSource.LoadCanangCallback{
-            override fun onAllCanangReceived(canangResponse: List<CanangResponse>) {
+    override fun getCanang(): LiveData<Resource<List<CanangEntity>>> {
+
+        return object : NetworkBoundResource<List<CanangEntity>, List<CanangResponse>>(appExecutors){
+            override fun loadFromDB(): LiveData<List<CanangEntity>> =
+                localDataSource.getCanang()
+
+            override fun shouldFetch(data: List<CanangEntity>?): Boolean =
+                data ==null || data.isEmpty()
+
+            override fun createCall(): LiveData<ApiResponse<List<CanangResponse>>> =
+                remoteDataSource.getCanang()
+
+            override fun saveCallResult(canangResponse: List<CanangResponse>) {
                 val canangList = ArrayList<CanangEntity>()
                 for (response in canangResponse) {
                     val canang = CanangEntity(
@@ -40,19 +57,26 @@ class CanangRepository private constructor(private val remoteDataSource: RemoteD
                     )
                     canangList.add(canang)
                 }
-                canangResults.postValue(canangList)
+                localDataSource.insertCanang(canangList)
             }
-
-        })
-        return canangResults
+        }.asLiveData()
     }
 
-    override fun getUpakara(): LiveData<List<UpakaraEntity>> {
-        val upakaraResults = MutableLiveData<List<UpakaraEntity>>()
-        remoteDataSource.getUpakara(object : RemoteDataSource.LoadUpakaraCallback{
-            override fun onAllUpakaraReceived(upakaraResponse: List<UpakaraResponse>) {
+    override fun getUpakara(): LiveData<Resource<List<UpakaraEntity>>> {
+
+        return object : NetworkBoundResource<List<UpakaraEntity>, List<UpakaraResponse>>(appExecutors){
+            override fun loadFromDB(): LiveData<List<UpakaraEntity>> =
+                localDataSource.getUpakara()
+
+            override fun shouldFetch(data: List<UpakaraEntity>?): Boolean =
+                data ==null || data.isEmpty()
+
+            override fun createCall(): LiveData<ApiResponse<List<UpakaraResponse>>> =
+                remoteDataSource.getUpakara()
+
+            override fun saveCallResult(data: List<UpakaraResponse>) {
                 val upakaraList = ArrayList<UpakaraEntity>()
-                for (response in upakaraResponse) {
+                for (response in data) {
                     val upakara = UpakaraEntity(
                         response.upakaraId,
                         response.title,
@@ -61,20 +85,25 @@ class CanangRepository private constructor(private val remoteDataSource: RemoteD
                     )
                     upakaraList.add(upakara)
                 }
-                upakaraResults.postValue(upakaraList)
+                localDataSource.insertUpakara(upakaraList)
             }
-
-        })
-
-        return upakaraResults
+        }.asLiveData()
     }
 
-    override fun getShop(): LiveData<List<ShopEntity>> {
-        val shopResults = MutableLiveData<List<ShopEntity>>()
-        remoteDataSource.getShop(object : RemoteDataSource.LoadShopCallback{
-            override fun onAllShopReceived(shopResponse: List<ShopResponse>) {
+    override fun getShop(): LiveData<Resource<List<ShopEntity>>> {
+
+        return object : NetworkBoundResource<List<ShopEntity>, List<ShopResponse>>(appExecutors){
+            override fun loadFromDB(): LiveData<List<ShopEntity>> =
+                localDataSource.getShop()
+            override fun shouldFetch(data: List<ShopEntity>?): Boolean =
+                data == null || data.isEmpty()
+
+            override fun createCall(): LiveData<ApiResponse<List<ShopResponse>>> =
+                remoteDataSource.getShop()
+
+            override fun saveCallResult(data: List<ShopResponse>) {
                 val shopList = ArrayList<ShopEntity>()
-                for (response in shopResponse) {
+                for (response in data) {
                     val shop = ShopEntity(
                         response.shopId,
                         response.name,
@@ -86,19 +115,25 @@ class CanangRepository private constructor(private val remoteDataSource: RemoteD
                     )
                     shopList.add(shop)
                 }
-                shopResults.postValue(shopList)
+                localDataSource.insertShop(shopList)
             }
-        })
-
-        return shopResults
+        }.asLiveData()
     }
 
-    override fun getPhilosophy(): LiveData<PhilosophyEntity> {
-        val philosophyResults = MutableLiveData<PhilosophyEntity>()
-        remoteDataSource.getPhilosophy(object : RemoteDataSource.LoadPhilosophyCallback {
-            override fun onAllPhilosophyReceived(philosophyResponse: List<PhilosophyResponse>) {
+    override fun getPhilosophy(): LiveData<Resource<List<PhilosophyEntity>>> {
+
+        return object : NetworkBoundResource<List<PhilosophyEntity>, List<PhilosophyResponse>>(appExecutors){
+            override fun loadFromDB(): LiveData<List<PhilosophyEntity>> =
+                localDataSource.getPhilosophy()
+            override fun shouldFetch(data: List<PhilosophyEntity>?): Boolean =
+                data == null || data.isEmpty()
+
+            override fun createCall(): LiveData<ApiResponse<List<PhilosophyResponse>>> =
+                 remoteDataSource.getPhilosophy()
+
+            override fun saveCallResult(data: List<PhilosophyResponse>) {
                 val philosophyList = ArrayList<PhilosophyEntity>()
-                for (response in philosophyResponse) {
+                for (response in data) {
                     val philosophy = PhilosophyEntity(
                         response.philosophyId,
                         response.title,
@@ -107,81 +142,103 @@ class CanangRepository private constructor(private val remoteDataSource: RemoteD
                     )
                     philosophyList.add(philosophy)
                 }
-                philosophyResults.postValue(philosophyList[0])
+                localDataSource.insertPhilosophy(philosophyList)
             }
-
-        })
-
-        return philosophyResults
+        }.asLiveData()
     }
 
-    override fun getDetailCanang(canangId: String): LiveData<CanangEntity> {
-        val canangResult = MutableLiveData<CanangEntity>()
+    override fun getDetailCanang(canangId: String): LiveData<Resource<CanangEntity>> {
+        return object : NetworkBoundResource<CanangEntity, CanangResponse>(appExecutors){
+            override fun loadFromDB(): LiveData<CanangEntity> =
+                localDataSource.getDetailCanang(canangId)
 
-        remoteDataSource.getCanang(object : RemoteDataSource.LoadCanangCallback {
-            override fun onAllCanangReceived(canangResponse: List<CanangResponse>) {
-                lateinit var canang: CanangEntity
-                for (response in canangResponse) {
-                    if (canangId == response.canangId.toString()) {
-                        canang = CanangEntity(
-                            response.canangId,
-                            response.title,
-                            response.imgPath,
-                            response.function,
-                            response.make
-                        )
-                    }
-                }
-                canangResult.postValue(canang)
+            override fun shouldFetch(data: CanangEntity?): Boolean =
+                data == null
+
+            override fun createCall(): LiveData<ApiResponse<CanangResponse>> =
+                remoteDataSource.getDetailCanang(canangId.toInt())
+
+            override fun saveCallResult(data: CanangResponse) {
+                val canang = CanangEntity(
+                    data.canangId,
+                    data.title,
+                    data.imgPath,
+                    data.function,
+                    data.make
+                )
+                localDataSource.updateDetailCanang(canang)
             }
-        })
-        return canangResult
+        }.asLiveData()
     }
 
-    override fun getDetailUpakara(upakaraId: String): LiveData<UpakaraEntity> {
-        val upakaraResult = MutableLiveData<UpakaraEntity>()
-        remoteDataSource.getUpakara(object : RemoteDataSource.LoadUpakaraCallback {
-            override fun onAllUpakaraReceived(upakaraResponse: List<UpakaraResponse>) {
-                lateinit var upakara: UpakaraEntity
-                for (response in upakaraResponse) {
-                    if (upakaraId == response.upakaraId.toString()) {
-                        upakara = UpakaraEntity(
-                            response.upakaraId,
-                            response.title,
-                            response.imgPath,
-                            response.desc,
-                        )
-                    }
-                }
-                upakaraResult.postValue(upakara)
+    override fun getDetailUpakara(upakaraId: String): LiveData<Resource<UpakaraEntity>> {
+
+        return object : NetworkBoundResource<UpakaraEntity, UpakaraResponse>(appExecutors){
+            override fun loadFromDB(): LiveData<UpakaraEntity> =
+                localDataSource.getDetailUpakara(upakaraId)
+
+            override fun shouldFetch(data: UpakaraEntity?): Boolean =
+                data == null
+
+            override fun createCall(): LiveData<ApiResponse<UpakaraResponse>> =
+                remoteDataSource.getDetailUpakara(upakaraId.toInt())
+
+            override fun saveCallResult(data: UpakaraResponse) {
+                val upakara = UpakaraEntity(
+                    data.upakaraId,
+                    data.title,
+                    data.imgPath,
+                    data.desc
+                )
+
+                localDataSource.updateDetailUpakara(upakara)
             }
-        })
-        return upakaraResult
+
+        }.asLiveData()
     }
 
-    override fun getDetailShop(shopId: String): LiveData<ShopEntity> {
+    override fun getDetailShop(shopId: String): LiveData<Resource<ShopEntity>> {
+        return object : NetworkBoundResource<ShopEntity, ShopResponse>(appExecutors){
+            override fun loadFromDB(): LiveData<ShopEntity> =
+                localDataSource.getDetailShop(shopId)
 
-        val shopResult = MutableLiveData<ShopEntity>()
-        remoteDataSource.getShop(object : RemoteDataSource.LoadShopCallback {
-            override fun onAllShopReceived(shopResponse: List<ShopResponse>) {
-                lateinit var shop: ShopEntity
-                for (response in shopResponse) {
-                    if (shopId == response.shopId.toString()) {
-                        shop = ShopEntity(
-                            response.shopId,
-                            response.name,
-                            response.imgPath,
-                            response.location,
-                            response.tlp,
-                            response.product,
-                            response.desc
-                        )
-                    }
-                }
-                shopResult.postValue(shop)
+            override fun shouldFetch(data: ShopEntity?): Boolean =
+                data == null
+
+            override fun createCall(): LiveData<ApiResponse<ShopResponse>> =
+                remoteDataSource.getDetailShop(shopId.toInt())
+
+            override fun saveCallResult(data: ShopResponse) {
+                val shop = ShopEntity(
+                    data.shopId,
+                    data.name,
+                    data.imgPath,
+                    data.location,
+                    data.tlp,
+                    data.product,
+                    data.desc
+                )
+                localDataSource.updateDetailShop(shop)
             }
-        })
 
-        return shopResult
+        }.asLiveData()
     }
+
+    override fun getBookmarkCanang(): LiveData<List<CanangEntity>> =
+        localDataSource.getBookmarkedCanang()
+
+    override fun getBookmarkUpakara(): LiveData<List<UpakaraEntity>> =
+        localDataSource.getBookmarkedUpakara()
+
+    override fun getBookmarkShop(): LiveData<List<ShopEntity>> =
+        localDataSource.getBookmarkedShop()
+
+    override fun setCanangBookmark(canang: CanangEntity, newState: Boolean) =
+        appExecutors.diskIO().execute{localDataSource.setCanangBookmark(canang,newState)}
+
+    override fun setUpakaraBookmark(upakara: UpakaraEntity, newState: Boolean) =
+        appExecutors.diskIO().execute{localDataSource.setUpakaraBookmark(upakara,newState)}
+
+    override fun setShopBookmark(shop: ShopEntity, newState: Boolean) =
+        appExecutors.diskIO().execute{localDataSource.setShopBookmark(shop,newState)}
 }
