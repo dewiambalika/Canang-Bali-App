@@ -22,6 +22,7 @@ class PhilosophyActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         philosophyBinding = ActivityPhilosophyBinding.inflate(layoutInflater)
         setContentView(philosophyBinding.root)
+        supportActionBar?.title = "Filosofi"
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(

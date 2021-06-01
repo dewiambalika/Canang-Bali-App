@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.arisurya.jetpackpro.canangbali.data.source.CanangRepository
 import com.arisurya.jetpackpro.canangbali.di.Injection
+import com.arisurya.jetpackpro.canangbali.ui.dashboard.DashboardViewModel
+import com.arisurya.jetpackpro.canangbali.ui.dashboard.bookmark.*
 import com.arisurya.jetpackpro.canangbali.ui.information.InformationViewModel
 import com.arisurya.jetpackpro.canangbali.ui.information.canang.CanangViewModel
 import com.arisurya.jetpackpro.canangbali.ui.information.canang.detail.DetailCanangViewModel
@@ -54,6 +56,18 @@ class ViewModelFactory private constructor(private val mCanangRepository: Canang
             }
             modelClass.isAssignableFrom(PhilosophyViewModel::class.java) -> {
                 return PhilosophyViewModel(mCanangRepository) as T
+            }
+            modelClass.isAssignableFrom(BookmarkCanangViewModel::class.java) -> {
+                return BookmarkCanangViewModel(mCanangRepository) as T
+            }
+            modelClass.isAssignableFrom(BookmarkUpakaraViewModel::class.java) -> {
+                return BookmarkUpakaraViewModel(mCanangRepository) as T
+            }
+            modelClass.isAssignableFrom(BookmarkShopViewModel::class.java) -> {
+                return BookmarkShopViewModel(mCanangRepository) as T
+            }
+            modelClass.isAssignableFrom(DashboardViewModel::class.java) -> {
+                return DashboardViewModel(mCanangRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

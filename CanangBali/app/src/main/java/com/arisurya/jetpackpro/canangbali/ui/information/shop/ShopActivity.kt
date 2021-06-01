@@ -21,6 +21,7 @@ class ShopActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         shopBinding = ActivityShopBinding.inflate(layoutInflater)
         setContentView(shopBinding.root)
+        supportActionBar?.title = "Toko"
 
         val factory = ViewModelFactory.getInstance(this)
 

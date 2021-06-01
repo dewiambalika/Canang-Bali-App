@@ -7,7 +7,7 @@
       "location": "Denpasar",
       "tlp": "089999999",
       "product": "Canang Sari, Canang Goak",
-      "desc": "Melayani semua jenis canang"   
+      "desc": "Melayani semua jenis canang"
     },
     {
       "shopId": 2,
@@ -16,7 +16,7 @@
       "location": "Gianyar",
       "tlp": "089999999",
       "product": "Canang Sari, Canang Goak",
-      "desc": "Melayani semua jenis canang"   
+      "desc": "Melayani semua jenis canang"
     },
     {
       "shopId": 3,
@@ -25,7 +25,7 @@
       "location": "Denpasar",
       "tlp": "089999999",
       "product": "Canang Sari, Canang Goak",
-      "desc": "Melayani semua jenis canang"   
+      "desc": "Melayani semua jenis canang"
     },
     {
       "shopId": 4,
@@ -34,7 +34,7 @@
       "location": "Badung",
       "tlp": "089999999",
       "product": "Canang Sari, Canang Goak",
-      "desc": "Melayani semua jenis canang"   
+      "desc": "Melayani semua jenis canang"
     },
     {
       "shopId": 5,
@@ -43,8 +43,8 @@
       "location": "Klungkung",
       "tlp": "089999999",
       "product": "Canang Sari, Canang Goak",
-      "desc": "Melayani semua jenis canang"   
+      "desc": "Melayani semua jenis canang"
     }
-  
+
   ]
 }

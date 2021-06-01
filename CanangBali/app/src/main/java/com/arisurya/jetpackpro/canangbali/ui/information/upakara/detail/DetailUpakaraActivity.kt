@@ -27,6 +27,7 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         detailUpakaraBinding = ActivityDetailUpakaraBinding.inflate(layoutInflater)
         setContentView(detailUpakaraBinding.root)
+        supportActionBar?.title = "Detail Upakara"
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailUpakaraViewModel::class.java]
@@ -52,6 +53,9 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
                                     
                                     Created by Canang Bali Team            
                                 """.trimIndent()
+
+                                val state = upakara.data?.bookmarked
+                                setBookmarkState(state)
                             }
                             Status.ERROR -> {
                                 showProgressBar(false)
@@ -75,6 +79,7 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
                 .load(upakara?.imgPath)
                 .into(imgUpakara)
             btnShare.setOnClickListener(this@DetailUpakaraActivity)
+            btnBookmark.setOnClickListener(this@DetailUpakaraActivity)
         }
     }
 
@@ -82,6 +87,9 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
         when(v){
             detailUpakaraBinding.btnShare ->{
                 shareDetailUpakara()
+            }
+            detailUpakaraBinding.btnBookmark -> {
+                setBookmarkUpakara()
             }
         }
 
@@ -104,5 +112,38 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
         }else{
             detailUpakaraBinding.progressBar.visibility = View.GONE
         }
+    }
+
+    private fun showToastAddBookmark(){
+        val toastView = layoutInflater.inflate(
+            R.layout.toast_success, findViewById(R.id.toast_add)
+        )
+        with(Toast(applicationContext)){
+            duration = Toast.LENGTH_SHORT
+            view = toastView
+            show()
+        }
+    }
+
+    private fun showToastRemoveBookmark(){
+        val toastView = layoutInflater.inflate(
+            R.layout.toast_remove, findViewById(R.id.toast_remove)
+        )
+        with(Toast(applicationContext)){
+            duration = Toast.LENGTH_SHORT
+            view = toastView
+            show()
+        }
+    }
+
+    private fun setBookmarkState(state : Boolean?){
+        if(state ==true) detailUpakaraBinding.btnBookmark.setImageResource(R.drawable.ic_bookmark)
+        else detailUpakaraBinding.btnBookmark.setImageResource(R.drawable.ic_bookmark_outline)
+    }
+
+    private fun setBookmarkUpakara(){
+        if(viewModel.detailUpakara.value?.data?.bookmarked == true) showToastRemoveBookmark()
+        else showToastAddBookmark()
+        viewModel.setBookmarkUpakara()
     }
 }

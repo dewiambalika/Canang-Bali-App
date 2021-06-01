@@ -29,6 +29,7 @@ class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         detailCanangBinding = ActivityDetailCanangBinding.inflate(layoutInflater)
         setContentView(detailCanangBinding.root)
+        supportActionBar?.title = "Detail Canang"
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailCanangViewModel::class.java]
@@ -56,6 +57,9 @@ class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
                                     
                                     Created by Canang Bali Team            
                                 """.trimIndent()
+
+                                val state = canang.data?.bookmarked
+                                setBookmarkState(state)
                             }
                             Status.ERROR ->{
                                 showProgressBar(false)
@@ -83,6 +87,7 @@ class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
                 .load(data?.imgPath)
                 .into(imgCanang)
             btnShare.setOnClickListener(this@DetailCanangActivity)
+            btnBookmark.setOnClickListener(this@DetailCanangActivity)
         }
 
     }
@@ -102,6 +107,10 @@ class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
            detailCanangBinding.btnShare ->{
                shareDetailCanang()
            }
+
+           detailCanangBinding.btnBookmark ->{
+               setBookmarkCanang()
+           }
        }
 
     }
@@ -111,5 +120,38 @@ class DetailCanangActivity : AppCompatActivity(), View.OnClickListener {
         }else{
             detailCanangBinding.progressBar.visibility = View.GONE
         }
+    }
+
+    private fun setBookmarkState(state : Boolean?){
+        if(state ==true) detailCanangBinding.btnBookmark.setImageResource(R.drawable.ic_bookmark)
+        else detailCanangBinding.btnBookmark.setImageResource(R.drawable.ic_bookmark_outline)
+    }
+
+    private fun showToastAddBookmark(){
+        val toastView = layoutInflater.inflate(
+            R.layout.toast_success, findViewById(R.id.toast_add)
+        )
+        with(Toast(applicationContext)){
+            duration = Toast.LENGTH_SHORT
+            view = toastView
+            show()
+        }
+    }
+
+    private fun showToastRemoveBookmark(){
+        val toastView = layoutInflater.inflate(
+            R.layout.toast_remove, findViewById(R.id.toast_remove)
+        )
+        with(Toast(applicationContext)){
+            duration = Toast.LENGTH_SHORT
+            view = toastView
+            show()
+        }
+    }
+
+    private fun setBookmarkCanang(){
+        if(viewModel.detailCanang.value?.data?.bookmarked == true) showToastRemoveBookmark()
+        else showToastAddBookmark()
+        viewModel.setBookmarkCanang()
     }
 }

@@ -60,5 +60,12 @@ interface CanangDao {
     @Update
     fun updateShope(shop: ShopEntity)
 
+    @Query("SELECT COUNT(*) FROM canangentities WHERE bookmarked=1")
+    fun getCountBookmarkCanang(): LiveData<Int>
 
+    @Query("SELECT COUNT(*) FROM upakaraentities WHERE bookmarked=1")
+    fun getCountBookmarkUpakara(): LiveData<Int>
+
+    @Query("SELECT COUNT(*) FROM shopentities WHERE bookmarked=1")
+    fun getCountBookmarkShop(): LiveData<Int>
 }

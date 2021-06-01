@@ -21,6 +21,8 @@ class UpakaraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         upakaraBinding = ActivityUpakaraBinding.inflate(layoutInflater)
         setContentView(upakaraBinding.root)
+        supportActionBar?.title = "Upakara"
+
         val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(this, factory)[UpakaraViewModel::class.java]
 

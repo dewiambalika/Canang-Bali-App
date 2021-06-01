@@ -20,6 +20,7 @@ class CanangActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         canangBinding = ActivityCanangBinding.inflate(layoutInflater)
         setContentView(canangBinding.root)
+        supportActionBar?.title = "Canang"
 
         val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(this,factory)[CanangViewModel::class.java]

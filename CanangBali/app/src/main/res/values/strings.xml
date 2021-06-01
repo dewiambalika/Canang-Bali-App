@@ -42,4 +42,8 @@
     <string name="bali">bali</string>
     <string name="filosofi_canang">Filosofi Canang</string>
     <string name="lihat_detail">Lihat Detail</string>
+    <string name="ditambahkan_ke_bookmark">Ditambahkan ke Bookmark</string>
+    <string name="dihapus_dari_bookmark">Dihapus dari Bookmark</string>
+    <string name="share">Share</string>
+    <string name="bookmark">Bookmark</string>
 </resources>

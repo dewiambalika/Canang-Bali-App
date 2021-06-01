@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CanangBali">
+        <activity android:name=".ui.dashboard.bookmark.BookmarkUpakaraActivity"></activity>
+        <activity android:name=".ui.dashboard.bookmark.BookmarkShopActivity" />
+        <activity android:name=".ui.dashboard.bookmark.BookmarkCanangActivity" />
         <activity android:name=".ui.splash.SplashScreenActivity" />
         <activity android:name=".ui.information.upakara.detail.DetailUpakaraActivity" />
         <activity android:name=".ui.information.upakara.UpakaraActivity" />

@@ -74,4 +74,10 @@ class LocalDataSource private constructor(private val mCanangDao: CanangDao) {
     fun updateDetailShop(shop : ShopEntity){
         mCanangDao.updateShope(shop)
     }
+
+    fun getCountBookmarkCanang() : LiveData<Int> = mCanangDao.getCountBookmarkCanang()
+
+    fun getCountBookmarkUpakara() : LiveData<Int> = mCanangDao.getCountBookmarkUpakara()
+
+    fun getCountBookmarkShop() : LiveData<Int> = mCanangDao.getCountBookmarkShop()
 }

@@ -21,4 +21,7 @@ interface CanangDataSource {
     fun setCanangBookmark(canang : CanangEntity, newState: Boolean)
     fun setUpakaraBookmark(upakara : UpakaraEntity, newState: Boolean)
     fun setShopBookmark(shop:ShopEntity, newState: Boolean)
+    fun getCountBookmarkCanang():LiveData<Int>
+    fun getCountBookmarkUpakara():LiveData<Int>
+    fun getCountBookmarkShop():LiveData<Int>
 }

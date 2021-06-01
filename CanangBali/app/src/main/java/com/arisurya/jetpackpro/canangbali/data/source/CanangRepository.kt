@@ -241,4 +241,14 @@ class CanangRepository private constructor(
 
     override fun setShopBookmark(shop: ShopEntity, newState: Boolean) =
         appExecutors.diskIO().execute{localDataSource.setShopBookmark(shop,newState)}
+
+    override fun getCountBookmarkCanang(): LiveData<Int> =
+        localDataSource.getCountBookmarkCanang()
+
+    override fun getCountBookmarkUpakara(): LiveData<Int> =
+        localDataSource.getCountBookmarkUpakara()
+
+    override fun getCountBookmarkShop(): LiveData<Int> =
+        localDataSource.getCountBookmarkShop()
+
 }
