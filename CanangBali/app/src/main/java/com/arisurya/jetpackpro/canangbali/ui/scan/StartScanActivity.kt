@@ -11,6 +11,7 @@ import android.view.View
 import androidx.core.app.ActivityCompat
 import com.arisurya.jetpackpro.canangbali.databinding.ActivityStartScanBinding
 import com.arisurya.jetpackpro.canangbali.ml.Model
+import com.google.firebase.database.FirebaseDatabase
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer

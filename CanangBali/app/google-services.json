@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "788258595045",
+    "project_id": "canang-bali",
+    "storage_bucket": "canang-bali.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788258595045:android:d57b5d7e659f18dcfab40c",
+        "android_client_info": {
+          "package_name": "com.arisurya.jetpackpro.canangbali"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788258595045-0abc54pep572m5qifrvkf5mc7qjc0997.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASQZdWdYjIIdeGOukauRjmBS01TvEH_F4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788258595045-0abc54pep572m5qifrvkf5mc7qjc0997.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
