@@ -2,49 +2,47 @@
   "shop": [
     {
       "shopId": 1,
-      "name": "Toko 1",
-      "imgPath": "",
-      "location": "Denpasar",
-      "tlp": "089999999",
-      "product": "Canang Sari, Canang Goak",
-      "desc": "Melayani semua jenis canang"
+      "name": "Dagang Canang Sari Padma Penatih",
+      "imgPath": "https://lh3.googleusercontent.com/ljyGrPwK1eCZZz-lsJgWS31NFqzoCTxmKe6E-3WhiANHojh7IZw3ntnBT8UqOmeTpIRIhqqQajdhgPyx=w960-h960-n-o-v1",
+      "location": "Jl. Padma, Penatih, Kec. Denpasar Utara, Kota Denpasar, Bali 80237",
+      "tlp": "0838-3153-3599",
+      "product": "Canang, Pejati, Bungkak, Daksina, dan lain-lain.",
+      "desc": "Menjual berbagai perlengkapan banten untuk upacara agama hindu Bali mulai dari -Canang -Pejati -Pracita -Bungkak -Lekesan -Daksina -Banten otonan -Dll. silahkan datang langsung ke Dagang Canang Sari Padma Penatih (timur bima gym) untuk pemesanan banten lebih lanjut."   
     },
     {
       "shopId": 2,
-      "name": "Toko 2",
-      "imgPath": "",
-      "location": "Gianyar",
-      "tlp": "089999999",
-      "product": "Canang Sari, Canang Goak",
-      "desc": "Melayani semua jenis canang"
+      "name": "Jual Canang Banten",
+      "imgPath": "https://lh3.googleusercontent.com/p/AF1QipN2QVmhbYDoDoGOda9asTyacQNMe6ZeviEhPZLP=w600-h0",
+      "location": "Jalan WR Supratman Desa No.Br, Kesiman Kertalangu, Denpasar Timur, Bali 80237",
+      "tlp": "0823-4004-1818",
+      "product": "Canang, Banten",
+      "desc": "Menjual berbagai jenis banten dan canang."   
     },
     {
       "shopId": 3,
-      "name": "Toko 3",
-      "imgPath": "",
-      "location": "Denpasar",
-      "tlp": "089999999",
-      "product": "Canang Sari, Canang Goak",
-      "desc": "Melayani semua jenis canang"
+      "name": "Dagang canang bu agus",
+      "imgPath": "https://www.goodnewsfromindonesia.id/wp-content/uploads/images/source/imalavins/agustus/2/IMG_3540.jpg",
+      "location": "Jl. Mekar Jaya II, Pemogan, Kec. Denpasar Sel., Kota Denpasar, Bali 80221",
+      "tlp": "0819-9942-0168",
+      "product": "Canang dan Pejati",
+      "desc": "Menjual canang dan menerima pesanan pejati, prayasita, banten odalan, caru"   
     },
     {
       "shopId": 4,
-      "name": "Toko 4",
-      "imgPath": "",
-      "location": "Badung",
-      "tlp": "089999999",
-      "product": "Canang Sari, Canang Goak",
-      "desc": "Melayani semua jenis canang"
+      "name": "Jual Banten Upakara Bali",
+      "imgPath": "https://scontent.fdps1-1.fna.fbcdn.net/v/t1.6435-9/39700633_987072254812282_8388343262510841856_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=973b4a&_nc_ohc=lz3Sn5AZ0PsAX-3uO26&_nc_ht=scontent.fdps1-1.fna&oh=3a06500d96611ae79f3a60ff40b946a8&oe=60DA0A45",
+      "location": "Gang Chandra Ayu 8 No. 3 Br. Tubuh Batubulan, Gianyar Bali (dekat rumah sakit premagana)",
+      "tlp": "0819-9979-7540",
+      "product": "Canang dan banten",
+      "desc": "Menjual banten upakara dan canang."   
     },
     {
       "shopId": 5,
-      "name": "Toko 5",
-      "imgPath": "",
-      "location": "Klungkung",
-      "tlp": "089999999",
-      "product": "Canang Sari, Canang Goak",
-      "desc": "Melayani semua jenis canang"
+      "name": "Jual canang delivery",
+      "imgPath": "https://scontent.fdps1-1.fna.fbcdn.net/v/t1.6435-9/45281095_2151883838400625_6425664253302145024_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=973b4a&_nc_ohc=B0WjTIPdLTsAX-tfeON&_nc_ht=scontent.fdps1-1.fna&oh=84bdbd16bba501e90de858062a86ae4a&oe=60DD5DAF",
+      "location": " Kota Denpasar",
+      "product": "Berbagai Jenis Canang",
+      "desc": "Menjual berbagai jenis canang dan melayani pesan antar."   
     }
-
   ]
 }
