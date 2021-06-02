@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">CanangBali</string>
     <string name="dashboard">Dashboard</string>
-    <string name="scan">Scan</string>
     <string name="information">Information</string>
     <string name="account">Account</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -46,4 +45,10 @@
     <string name="dihapus_dari_bookmark">Dihapus dari Bookmark</string>
     <string name="share">Share</string>
     <string name="bookmark">Bookmark</string>
+    <string name="buka_kamera">Buka Kamera</string>
+    <string name="pilih_dari_local">Pilih Dari Local</string>
+    <string name="scan">Scan</string>
+    <string name="mulai_scan">Mulai Scan</string>
+    <string name="instruksi_scan">1.Foto yang bisa digunakan dengan format .jpg,.jpeg \n\n2.Carilah tempat yang cukup cahaya ketika menggunakan kamera untuk klasifikasi canang</string>
+
 </resources>
