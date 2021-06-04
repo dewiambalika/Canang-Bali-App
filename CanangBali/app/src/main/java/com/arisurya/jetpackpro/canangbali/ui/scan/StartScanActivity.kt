@@ -1,17 +1,31 @@
 package com.arisurya.jetpackpro.canangbali.ui.scan
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.arisurya.jetpackpro.canangbali.R
 import com.arisurya.jetpackpro.canangbali.databinding.ActivityStartScanBinding
 import com.arisurya.jetpackpro.canangbali.ml.Model
+import com.arisurya.jetpackpro.canangbali.ui.information.canang.detail.DetailCanangActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -22,6 +36,7 @@ import java.nio.ByteOrder
 class StartScanActivity : AppCompatActivity() {
     private lateinit var bitmap: Bitmap
     private lateinit var binding : ActivityStartScanBinding
+    private lateinit var canangId : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,9 +88,9 @@ class StartScanActivity : AppCompatActivity() {
 
             // Releases model resources if no longer used.
             model.close()
+            showDialog(max.toString())
 
         })
-
 
 
     }
@@ -149,6 +164,63 @@ class StartScanActivity : AppCompatActivity() {
             binding.btnOpenCam.isEnabled = true
         }
 
+    }
+
+    private fun showDialog(index : String) {
+        val dialog = Dialog(this@StartScanActivity)
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.alert_dialog)
+        dialog.setCancelable(true)
+
+        @Suppress("LocalVariableName")
+        val btn_detail = dialog.findViewById<Button>(R.id.btn_go_detail)
+        val btn_cancel = dialog.findViewById<Button>(R.id.btn_cancel)
+        val tv_result = dialog.findViewById<TextView>(R.id.tv_result)
+        val progressBar = dialog.findViewById<ProgressBar>(R.id.progress_bar)
+
+        var database = FirebaseDatabase.getInstance().getReference("canang")
+        progressBar.visibility = View.VISIBLE
+        var getData = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var sb = StringBuilder()
+                var id = StringBuilder()
+                for(i in snapshot.children){
+                    if(i.key == index){
+                        var name = i.child("title").getValue()
+                        var idCanang = i.child("canangId").getValue()
+                        sb.append("$name")
+                        id.append(idCanang)
+                        canangId = id.toString()
+                    }
+                }
+                tv_result.setText(sb)
+                progressBar.visibility = View.GONE
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        }
+        database.addValueEventListener(getData)
+        database.addListenerForSingleValueEvent(getData)
+
+
+        btn_detail.setOnClickListener {
+            val intent = Intent(this, ResultScanActivity::class.java)
+            intent.putExtra(ResultScanActivity.EXTRA_CANANG, canangId)
+            startActivity(intent)
+        }
+        btn_cancel.setOnClickListener{
+            dialog.cancel()
+        }
+
+        dialog.show()
     }
 
 }

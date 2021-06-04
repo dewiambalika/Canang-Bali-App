@@ -5,6 +5,10 @@ import com.arisurya.jetpackpro.canangbali.data.source.remote.response.CanangResp
 import com.arisurya.jetpackpro.canangbali.data.source.remote.response.PhilosophyResponse
 import com.arisurya.jetpackpro.canangbali.data.source.remote.response.ShopResponse
 import com.arisurya.jetpackpro.canangbali.data.source.remote.response.UpakaraResponse
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
@@ -47,6 +51,45 @@ class JsonHelper(private val context: Context) {
             e.printStackTrace()
         }
 
+        return list
+    }
+
+    fun loadCanangFromFirebase():List<CanangResponse>{
+        val list = ArrayList<CanangResponse>()
+        try {
+            var firebase = FirebaseDatabase.getInstance().getReference("canang")
+
+            firebase.addValueEventListener(object  : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        for (data in snapshot.children){
+//                            var canangId  =data.child("canangId").getValue()
+//                            var title = data.child("title").getValue()
+//                            var imgPath = data.child("imgPath").getValue()
+//                            var fungsi = data.child("function").getValue()
+//                            var make = data.child("make").getValue()
+//                            var canang = CanangResponse(
+//                                canangId.toString().toInt(),
+//                                title.toString(),
+//                                imgPath.toString(),
+//                                fungsi.toString(),
+//                                make.toString()
+//                            )
+                            var canang = data.getValue(CanangResponse::class.java)!!
+                            list.add(canang)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+
+
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
         return list
     }
 

@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CanangBali">
-        <activity android:name=".ui.scan.StartScanActivity"></activity>
+        <activity android:name=".ui.scan.ResultScanActivity"></activity>
+        <activity android:name=".ui.scan.StartScanActivity" />
         <activity android:name=".ui.dashboard.bookmark.BookmarkUpakaraActivity" />
         <activity android:name=".ui.dashboard.bookmark.BookmarkShopActivity" />
         <activity android:name=".ui.dashboard.bookmark.BookmarkCanangActivity" />
