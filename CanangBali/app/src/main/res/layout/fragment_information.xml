@@ -9,7 +9,7 @@
     tools:context=".ui.information.InformationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        style="@style/BgGreySoft"
+        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.information.InformationFragment">
@@ -18,7 +18,6 @@
             android:id="@+id/card_phi"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="fitStart"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
@@ -26,6 +25,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/img_bg_philosophy"
             app:layout_constraintHorizontal_bias="1.0"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/RoundedSquare" />
@@ -38,7 +39,7 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/filosofi_canang"
-            android:textColor="@color/primaryColor"
+            android:textColor="@android:color/white"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/btn_detail_phi"
             app:layout_constraintStart_toStartOf="@+id/card_phi" />
@@ -52,7 +53,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/upakara"
             android:textColor="@color/primaryColor"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_phi" />
@@ -60,15 +61,17 @@
         <Button
             android:id="@+id/btn_detail_phi"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@color/secondaryColor"
+            android:background="@drawable/ripple_button"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/lihat_detail"
             android:textAllCaps="false"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:textColor="@color/secondaryTextColor"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/card_phi"
             app:layout_constraintStart_toStartOf="@+id/card_phi" />
 
@@ -107,7 +110,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/canang"
             android:textColor="@color/primaryColor"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_upakara" />
@@ -147,7 +150,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/toko"
             android:textColor="@color/primaryColor"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_canang" />

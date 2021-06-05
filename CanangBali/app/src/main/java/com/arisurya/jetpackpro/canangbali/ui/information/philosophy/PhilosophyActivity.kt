@@ -73,6 +73,9 @@ class PhilosophyActivity : AppCompatActivity(), View.OnClickListener {
             Glide.with(this@PhilosophyActivity)
                 .load(philosophy?.imgPath)
                 .into(imgPhi)
+            Glide.with(this@PhilosophyActivity)
+                .load(philosophy?.imgPath)
+                .into(imgBgPhi)
 
         }
     }

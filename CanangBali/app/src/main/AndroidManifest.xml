@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.arisurya.jetpackpro.canangbali">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,21 +11,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m"
         android:theme="@style/Theme.CanangBali">
         <activity android:name=".ui.scan.ResultScanActivity"></activity>
         <activity android:name=".ui.scan.StartScanActivity" />
         <activity android:name=".ui.dashboard.bookmark.BookmarkUpakaraActivity" />
         <activity android:name=".ui.dashboard.bookmark.BookmarkShopActivity" />
         <activity android:name=".ui.dashboard.bookmark.BookmarkCanangActivity" />
-        <activity android:name=".ui.splash.SplashScreenActivity" />
-        <activity android:name=".ui.information.upakara.detail.DetailUpakaraActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.information.upakara.detail.DetailUpakaraActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".ui.information.upakara.UpakaraActivity" />
         <activity android:name=".ui.information.shop.detail.DetailShopActivity" />
         <activity android:name=".ui.information.shop.ShopActivity" />
-        <activity android:name=".ui.information.philosophy.PhilosophyActivity" />
-        <activity android:name=".ui.information.canang.detail.DetailCanangActivity" />
+        <activity android:name=".ui.information.philosophy.PhilosophyActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".ui.information.canang.detail.DetailCanangActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".ui.information.canang.CanangActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.splash.SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

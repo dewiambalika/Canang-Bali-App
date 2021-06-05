@@ -5,7 +5,9 @@ import com.arisurya.jetpackpro.canangbali.data.source.local.entity.CanangEntity
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.PhilosophyEntity
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.ShopEntity
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.UpakaraEntity
+import com.arisurya.jetpackpro.canangbali.ui.scan.UploadRequestBody
 import com.arisurya.jetpackpro.canangbali.vo.Resource
+import java.io.File
 
 interface CanangDataSource {
     fun getCanang():LiveData<Resource<List<CanangEntity>>>
@@ -24,4 +26,5 @@ interface CanangDataSource {
     fun getCountBookmarkCanang():LiveData<Int>
     fun getCountBookmarkUpakara():LiveData<Int>
     fun getCountBookmarkShop():LiveData<Int>
+    fun getResultDetection(body : UploadRequestBody, file : File, contentType : String) : LiveData<String>
 }

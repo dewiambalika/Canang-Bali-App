@@ -15,6 +15,7 @@ import com.arisurya.jetpackpro.canangbali.ui.information.shop.ShopViewModel
 import com.arisurya.jetpackpro.canangbali.ui.information.shop.detail.DetailShopViewModel
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.UpakaraViewModel
 import com.arisurya.jetpackpro.canangbali.ui.information.upakara.detail.DetailUpakaraViewModel
+import com.arisurya.jetpackpro.canangbali.ui.scan.StartScanViewModel
 
 class ViewModelFactory private constructor(private val mCanangRepository: CanangRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -68,6 +69,10 @@ class ViewModelFactory private constructor(private val mCanangRepository: Canang
             }
             modelClass.isAssignableFrom(DashboardViewModel::class.java) -> {
                 return DashboardViewModel(mCanangRepository) as T
+            }
+
+            modelClass.isAssignableFrom(StartScanViewModel::class.java) -> {
+                return StartScanViewModel(mCanangRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

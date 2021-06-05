@@ -3,7 +3,6 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/BgGreySoft"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
@@ -16,40 +15,52 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/card_about"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="230dp"
             android:background="@drawable/background_with_shadow"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_bg_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+            app:shapeAppearanceOverlay="@style/SpecificCornerRoundedBottom" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/img_bg_about"
+            app:layout_constraintEnd_toEndOf="@+id/card_about"
+            app:layout_constraintStart_toStartOf="@+id/card_about"
+            app:layout_constraintTop_toTopOf="@+id/card_about" />
 
         <TextView
             android:id="@+id/tv_about_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/canang_bali_apps"
-            android:textColor="@color/primaryColor"
+            android:textColor="@color/primaryTextColor"
             android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/card_about"
             app:layout_constraintStart_toStartOf="@+id/card_about"
-            app:layout_constraintTop_toTopOf="@+id/card_about" />
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
 
         <TextView
             android:id="@+id/tv_about_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="120dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="120dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="@string/desc"
-            android:textSize="14sp"
+            android:text="@string/about_canang"
+            android:textAlignment="center"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_about_title" />
@@ -64,7 +75,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/dashboard_anda"
             android:textColor="@color/secondaryTextColor"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_about" />
 
@@ -89,7 +100,7 @@
             android:layout_marginEnd="35dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/upakara"
-            android:textColor="@color/secondaryTextColor"
+            android:textColor="@color/primaryColor"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/card_upakara"
             app:layout_constraintTop_toTopOf="@+id/card_upakara" />
@@ -114,7 +125,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/item"
             android:textColor="@color/secondaryTextColor"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_number_upakara"
             app:layout_constraintStart_toEndOf="@+id/tv_number_upakara" />
 
@@ -125,7 +136,7 @@
             android:layout_marginStart="35dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/_0"
-            android:textColor="@color/secondaryTextColor"
+            android:textColor="@color/primaryColor"
             android:textSize="50sp"
             app:layout_constraintStart_toStartOf="@+id/card_upakara"
             app:layout_constraintTop_toTopOf="@+id/card_upakara" />
@@ -137,6 +148,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:src="@color/secondaryColor"
             android:background="@drawable/background_with_shadow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -152,7 +164,7 @@
             android:layout_marginEnd="35dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/canang"
-            android:textColor="@color/secondaryTextColor"
+            android:textColor="@color/primaryColor"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/card_canang"
             app:layout_constraintTop_toTopOf="@+id/card_canang" />
@@ -165,6 +177,7 @@
             android:text="@string/lihat_semua"
             android:textSize="14sp"
             android:textStyle="italic"
+            android:textColor="@color/secondaryTextColor"
             app:layout_constraintStart_toStartOf="@+id/tv_dashboard_canang"
             app:layout_constraintTop_toBottomOf="@+id/tv_dashboard_canang" />
 
@@ -176,7 +189,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/item"
             android:textColor="@color/secondaryTextColor"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_number_canang"
             app:layout_constraintStart_toEndOf="@+id/tv_number_canang" />
 
@@ -187,7 +200,7 @@
             android:layout_marginStart="35dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/_0"
-            android:textColor="@color/secondaryTextColor"
+            android:textColor="@color/primaryColor"
             android:textSize="50sp"
             app:layout_constraintStart_toStartOf="@+id/card_canang"
             app:layout_constraintTop_toTopOf="@+id/card_canang" />
@@ -200,6 +213,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
+            android:src="@color/primaryColor"
             android:background="@drawable/background_with_shadow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -216,7 +230,7 @@
             android:layout_marginEnd="65dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/toko"
-            android:textColor="@color/secondaryTextColor"
+            android:textColor="@color/secondaryColor"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/card_shop"
             app:layout_constraintTop_toTopOf="@+id/card_shop" />
@@ -229,6 +243,7 @@
             android:text="@string/lihat_semua"
             android:textSize="14sp"
             android:textStyle="italic"
+            android:textColor="@color/primaryTextColor"
             app:layout_constraintStart_toStartOf="@+id/tv_dashboard_shop"
             app:layout_constraintTop_toBottomOf="@+id/tv_dashboard_shop" />
 
@@ -239,8 +254,8 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/item"
-            android:textColor="@color/secondaryTextColor"
-            android:textSize="14sp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_number_shop"
             app:layout_constraintStart_toEndOf="@+id/tv_number_shop" />
 
@@ -251,7 +266,7 @@
             android:layout_marginStart="35dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/_0"
-            android:textColor="@color/secondaryTextColor"
+            android:textColor="@color/secondaryColor"
             android:textSize="50sp"
             app:layout_constraintStart_toStartOf="@+id/card_shop"
             app:layout_constraintTop_toTopOf="@+id/card_shop" />

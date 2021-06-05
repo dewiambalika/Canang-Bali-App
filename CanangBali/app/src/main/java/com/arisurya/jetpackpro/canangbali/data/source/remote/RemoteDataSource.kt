@@ -2,14 +2,21 @@ package com.arisurya.jetpackpro.canangbali.data.source.remote
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.arisurya.jetpackpro.canangbali.data.source.local.entity.CanangEntity
-import com.arisurya.jetpackpro.canangbali.data.source.remote.response.CanangResponse
-import com.arisurya.jetpackpro.canangbali.data.source.remote.response.PhilosophyResponse
-import com.arisurya.jetpackpro.canangbali.data.source.remote.response.ShopResponse
-import com.arisurya.jetpackpro.canangbali.data.source.remote.response.UpakaraResponse
+import com.arisurya.jetpackpro.canangbali.data.source.remote.api.ApiConfig
+import com.arisurya.jetpackpro.canangbali.data.source.remote.response.*
+import com.arisurya.jetpackpro.canangbali.ui.scan.UploadRequestBody
 import com.arisurya.jetpackpro.canangbali.utils.JsonHelper
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 
 
 class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
@@ -18,6 +25,7 @@ class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
 
     companion object {
         private const val SERVICE_LATENCY_IN_MILLIS: Long = 2000
+        const val TAG ="RemoteDataSource"
 
         @Volatile
         private var instance: RemoteDataSource? = null
@@ -102,6 +110,38 @@ class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
         )
         return resultPhilosophy
     }
+
+    fun uploadPhotoPredict(body : UploadRequestBody, file : File, contentType : String) : MutableLiveData<String>{
+
+        var result = MutableLiveData<String>()
+
+        val client = ApiConfig.getApiService().uploadImage(
+            MultipartBody.Part.createFormData(contentType, file.name, body),
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json")
+        )
+        client.enqueue(object : Callback<UploadResponse> {
+            override fun onResponse(
+                call: Call<UploadResponse>,
+                response: Response<UploadResponse>
+            ) {
+                if(response.isSuccessful){
+                    response.body()?.let {
+                        result.value =   it.toString().slice(21..it.toString().length-2)
+                    }
+                }else{
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+            }
+
+        })
+
+        return result
+    }
+
 
     interface LoadCanangCallback {
         fun onAllCanangReceived(canangResponse: List<CanangResponse>)

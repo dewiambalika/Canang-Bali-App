@@ -19,6 +19,17 @@
         <item name="cornerFamilyBottomLeft">rounded</item>
     </style>
 
+    <style name="SpecificCornerRoundedBottom">
+        <item name="cornerSizeBottomLeft">10%</item>
+        <item name="cornerSizeBottomRight">10%</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+    </style>
+    <style name="SpecificCornerRoundedBottom2">
+        <item name="cornerSizeBottomLeft">40%</item>
+        <item name="cornerSizeBottomRight">40%</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+    </style>
+
     <style name="RoundedSquare">
         <item name="cornerSize">5%</item>
     </style>

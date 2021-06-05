@@ -13,8 +13,10 @@ import com.arisurya.jetpackpro.canangbali.data.source.remote.response.CanangResp
 import com.arisurya.jetpackpro.canangbali.data.source.remote.response.PhilosophyResponse
 import com.arisurya.jetpackpro.canangbali.data.source.remote.response.ShopResponse
 import com.arisurya.jetpackpro.canangbali.data.source.remote.response.UpakaraResponse
+import com.arisurya.jetpackpro.canangbali.ui.scan.UploadRequestBody
 import com.arisurya.jetpackpro.canangbali.utils.AppExecutors
 import com.arisurya.jetpackpro.canangbali.vo.Resource
+import java.io.File
 
 
 class CanangRepository private constructor(
@@ -250,5 +252,15 @@ class CanangRepository private constructor(
 
     override fun getCountBookmarkShop(): LiveData<Int> =
         localDataSource.getCountBookmarkShop()
+
+    override fun getResultDetection(
+        body: UploadRequestBody,
+        file: File,
+        contentType: String
+    ): LiveData<String> {
+        lateinit var  result : LiveData<String>
+        result = remoteDataSource.uploadPhotoPredict(body,file,contentType)
+        return result
+    }
 
 }

@@ -1,17 +1,17 @@
 <resources>
-    <string name="app_name">CanangBali</string>
+    <string name="app_name">Canang Bali</string>
     <string name="dashboard">Dashboard</string>
     <string name="information">Information</string>
     <string name="account">Account</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="_0">0</string>
-    <string name="item">Item</string>
+    <string name="item">bookmark</string>
     <string name="see_more">see more</string>
-    <string name="upakara">UPAKARA</string>
-    <string name="canang">CANANG</string>
+    <string name="upakara">Upakara</string>
+    <string name="canang">Canang</string>
     <string name="lihat_semua">lihat semua</string>
-    <string name="toko">TOKO</string>
+    <string name="toko">Toko</string>
     <string name="canang_bali_apps">Canang Bali Apps</string>
     <string name="dashboard_anda">Bookmark Anda</string>
     <string name="desc">Desc</string>
@@ -57,5 +57,6 @@
     <string name="detail">Detail</string>
     <string name="select_and_predict">Pilih dan Scan</string>
     <string name="lihat_hasil_lebih_detail">Lihat Hasil Lebih Detail</string>
+    <string name="about_canang">Mengenali jenis canang dan kegunaannya.</string>
 
 </resources>
