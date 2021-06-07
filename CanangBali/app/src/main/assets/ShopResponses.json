@@ -3,7 +3,7 @@
     {
       "shopId": 1,
       "name": "Dagang Canang Sari Padma Penatih",
-      "imgPath": "https://lh3.googleusercontent.com/ljyGrPwK1eCZZz-lsJgWS31NFqzoCTxmKe6E-3WhiANHojh7IZw3ntnBT8UqOmeTpIRIhqqQajdhgPyx=w960-h960-n-o-v1",
+      "imgPath": "https://4.bp.blogspot.com/-59L1BriEIzI/XLmFHtxeBZI/AAAAAAAAAP8/eIK_vUHmZPQjL7KuTCIVzOx28QMEdkQqwCLcBGAs/s1600/pejati.jpg",
       "location": "Jl. Padma, Penatih, Kec. Denpasar Utara, Kota Denpasar, Bali 80237",
       "tlp": "0838-3153-3599",
       "product": "Canang, Pejati, Bungkak, Daksina, dan lain-lain.",
@@ -38,11 +38,21 @@
     },
     {
       "shopId": 5,
-      "name": "Jual canang delivery",
-      "imgPath": "https://scontent.fdps1-1.fna.fbcdn.net/v/t1.6435-9/45281095_2151883838400625_6425664253302145024_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=973b4a&_nc_ohc=B0WjTIPdLTsAX-tfeON&_nc_ht=scontent.fdps1-1.fna&oh=84bdbd16bba501e90de858062a86ae4a&oe=60DD5DAF",
-      "location": " Kota Denpasar",
+      "name": "Men Eka, Dagang Canang",
+      "imgPath": "https://cdn-radar.jawapos.com/thumbs/l/baliexpress/news/2017/12/03/ini-bentuk-isi-serta-makna-sepuluh-canang-yang-digunakan-di-bali_c_2_31018.jpeg",
+      "location": "Jl. A.Yani VII No.19, Abian Tuwung, Kec. Kediri, Kabupaten Tabanan, Bali 82121",
+      "tlp": "0898-0161-526",
       "product": "Berbagai Jenis Canang",
-      "desc": "Menjual berbagai jenis canang dan melayani pesan antar."   
+      "desc": "Menjual berbagai jenis canang."   
+    },
+    {
+      "shopId": 6,
+      "name": "CANANG CEPER BU ARIS",
+      "imgPath": "https://pancadana.bumdesmart.id/assets/uploads/1ad19-img_20201003_181600.jpg",
+      "location": "Jln Suraberata - Belatungan Tabanan",
+      "tlp": "0819-9992-453",
+      "product": "Menjual Canang",
+      "desc": "Menjual berbagai jenis canang."   
     }
   ]
 }
