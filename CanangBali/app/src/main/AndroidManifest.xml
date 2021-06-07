@@ -18,8 +18,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".ui.login.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".ui.scan.ResultScanActivity" />
-        <activity android:name=".ui.scan.StartScanActivity" />
+        <activity android:name=".ui.scan.ResultScanActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ui.scan.StartScanActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".ui.dashboard.bookmark.BookmarkUpakaraActivity" />
         <activity android:name=".ui.dashboard.bookmark.BookmarkShopActivity" />
         <activity android:name=".ui.dashboard.bookmark.BookmarkCanangActivity" />

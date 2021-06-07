@@ -52,27 +52,31 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
         val factory = ViewModelFactory.getInstance(this)
         viewModel  = ViewModelProvider(this, factory)[StartScanViewModel::class.java]
 
-        binding.btnOpenCam.isEnabled = true
-        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA),111)
-        }else{
-            binding.btnOpenCam.isEnabled = true
-        }
-
+        setEnableBtnPredict(false)
         binding.btnOpenCam.setOnClickListener {
-            val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(i, 101)
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q){
+                val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(i, 101)
+                setEnableBtnPredict(true)
+            }else{
+                dialogUnderVersionAndroid()
+            }
         }
 
         binding.btnSelect.setOnClickListener(View.OnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "image/*"
-            startActivityForResult(intent, 100)
+            Intent(Intent.ACTION_PICK).also {
+                it.type = "image/*"
+                val mimeTypes = arrayOf("image/jpeg", "image/png")
+                it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+                startActivityForResult(it, 101)
+            }
+            setEnableBtnPredict(true)
         })
 
 
         binding.btnPredict.setOnClickListener(View.OnClickListener {
-            showDialog()
+            if(selectedImageUri!=null) showDialog()
+            else  Toast.makeText(this, "Maaf, foto masih kosong", Toast.LENGTH_SHORT).show()
         })
 
 
@@ -81,10 +85,11 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==101){
-            var pic = data?.getParcelableExtra<Bitmap>("data")
-            binding.imageView.setImageBitmap(pic)
-            bitmap = pic!!
-            selectedImageUri = getImageUri(this, bitmap)
+            selectedImageUri = data?.data
+            binding.imageView.setImageURI(selectedImageUri)
+
+            if(selectedImageUri==null) setEnableBtnPredict(false)
+            else setEnableBtnPredict(true)
         }
 
         if(requestCode==100){
@@ -93,19 +98,10 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
             var uri : Uri? = data?.data
             bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
             selectedImageUri = data?.data
-        }
-    }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == 111 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            binding.btnOpenCam.isEnabled = true
+            if(selectedImageUri==null) setEnableBtnPredict(false)
+            else setEnableBtnPredict(true)
         }
-
     }
 
     private fun showDialog() {
@@ -125,10 +121,9 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
         val tv_result = dialog.findViewById<TextView>(R.id.tv_result)
         val progressBar = dialog.findViewById<ProgressBar>(R.id.progress_bar)
 
-
+        btn_detail.isEnabled = false
         if(selectedImageUri!=null){
             val parcelFileDescriptor = contentResolver.openFileDescriptor(selectedImageUri!!, "r", null)
-
             val inputStream = FileInputStream(parcelFileDescriptor?.fileDescriptor)
             val file = File(cacheDir, contentResolver.getFileName(selectedImageUri!!))
             val outputStream = FileOutputStream(file)
@@ -140,7 +135,6 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
                 resultPredict = data
 
                 var index = getIdCanang(data)
-
                 var database = FirebaseDatabase.getInstance().getReference("canang")
                 progressBar.visibility = View.VISIBLE
                 var getData = object : ValueEventListener {
@@ -149,19 +143,19 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
                         var id = StringBuilder()
                         for(i in snapshot.children){
                             if(i.key == index){
-                                var name = i.child("title").getValue()
-                                var idCanang = i.child("canangId").getValue()
+                                var name = i.child("title").value
+                                var idCanang = i.child("canangId").value
                                 sb.append("$name")
                                 id.append(idCanang)
                                 canangId = id.toString()
                             }
                         }
-                        tv_result.setText(sb)
+                        tv_result.text = sb
                         progressBar.visibility = View.GONE
+                        btn_detail.isEnabled = true
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-
                     }
 
                 }
@@ -170,10 +164,9 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
             })
 
         }else{
+            btn_detail.isEnabled = false
             Toast.makeText(this, "Maaf, foto masih kosong", Toast.LENGTH_SHORT).show()
         }
-
-
 
 
         btn_detail.setOnClickListener {
@@ -208,6 +201,28 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
             "Canang Genten"->"3"
             else -> ""
         }
+    }
+
+    private fun setEnableBtnPredict(state : Boolean){
+        binding.btnPredict.isEnabled = state
+    }
+
+    private fun dialogUnderVersionAndroid(){
+        val dialog = Dialog(this@StartScanActivity)
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.alert_dialog_sdk)
+        dialog.setCancelable(true)
+
+        val btn_close = dialog.findViewById<Button>(R.id.btn_close)
+        btn_close.setOnClickListener {
+            dialog.cancel()
+        }
+        dialog.show()
     }
 
 }

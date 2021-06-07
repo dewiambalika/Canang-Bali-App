@@ -48,12 +48,12 @@
     <string name="buka_kamera">Buka Kamera</string>
     <string name="pilih_dari_local">Pilih Dari Local</string>
     <string name="scan">Scan</string>
-    <string name="mulai_scan">Mulai Scan</string>
-    <string name="instruksi_scan">1.Foto yang bisa digunakan dengan format .jpg,.jpeg \n\n2.Carilah tempat yang cukup cahaya ketika menggunakan kamera untuk klasifikasi canang</string>
+    <string name="mulai_scan">Mulai</string>
+    <string name="instruksi_scan">1.Foto yang bisa digunakan dengan format .jpg,.jpeg\n\n2.Carilah tempat yang cukup cahaya ketika menggunakan kamera untuk klasifikasi canang\n\n3.Pastikan ponsel anda terhubung dengan koneksi internet</string>
     <string name="hasil_scan">Hasil Scan :</string>
     <string name="result">Result</string>
     <string name="informasi_lebih_lengkap_klik_detail">Informasi lebih lengkap, klik detail</string>
-    <string name="cencel">Cencel</string>
+    <string name="cencel">Cancel</string>
     <string name="detail">Detail</string>
     <string name="select_and_predict">Pilih dan Scan</string>
     <string name="lihat_hasil_lebih_detail">Lihat Hasil Lebih Detail</string>
@@ -68,9 +68,12 @@
     <string name="enter_adress">masukan alamat</string>
     <string name="enter_age">masukan umur</string>
     <string name="enter_gender">masukan jenis kelamin</string>
-    <string name="enter_lastname">manusakan nama akhir</string>
+    <string name="enter_lastname">masukan nama akhir</string>
     <string name="pilih_jenis_kelamin">pilih jenis kelamin</string>
     <string name="desc_regis">Belum punya account? Daftar disini!</string>
     <string name="login">Masuk</string>
     <string name="logout">Keluar</string>
+    <string name="close">Tutup</string>
+    <string name="peringatan">Peringatan!</string>
+    <string name="desc_under_sdk">Maaf, untuk saat ini fitur kamera hanya bisa digunakan pada versi Android 10 keatas. Sebagai opsi, anda bisa memilih foto dari galeri. Pembaruan akan segera dilakukan</string>
 </resources>
