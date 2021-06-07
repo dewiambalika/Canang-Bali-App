@@ -27,13 +27,10 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="100dp"
-            android:src="@color/secondaryColor"
+            android:src="@drawable/ic_account"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeWidth="2dp"
-            app:strokeColor="@color/secondaryColor"
-            app:shapeAppearanceOverlay="@style/Circular"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/bg_detail_account"
@@ -80,35 +77,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_dm_name" />
 
         <TextView
-            android:id="@+id/tv_dm_gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/gender"
-            android:textColor="@color/primaryColor"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="@+id/tv_dm_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
-
-        <TextView
-            android:id="@+id/tv_account_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:layout_marginEnd="44dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/empty"
-            android:textColor="@color/secondaryTextColor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_dm_gender" />
-
-        <TextView
             android:id="@+id/tv_dm_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -118,8 +86,8 @@
             android:textColor="@color/primaryColor"
             android:textSize="12sp"
             android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="@+id/tv_dm_gender"
-            app:layout_constraintTop_toBottomOf="@+id/tv_account_gender" />
+            app:layout_constraintStart_toStartOf="@+id/tv_dm_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
 
         <TextView
             android:id="@+id/tv_account_address"
@@ -230,15 +198,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@color/secondaryColor"
+            android:background="@drawable/ripple_button"
             android:fontFamily="@font/poppins_regular"
-            android:text="@string/edit"
+            android:text="@string/logout"
+            android:textAllCaps="false"
             android:textColor="@color/secondaryTextColor"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/bg_detail_account"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_account_email" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/primaryColor"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_detail_account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

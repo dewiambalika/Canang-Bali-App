@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import com.arisurya.jetpackpro.canangbali.MainActivity
 import com.arisurya.jetpackpro.canangbali.R
 import com.arisurya.jetpackpro.canangbali.databinding.ActivitySplashScreenBinding
+import com.arisurya.jetpackpro.canangbali.ui.login.LoginActivity
 
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
@@ -22,7 +23,7 @@ class SplashScreenActivity : AppCompatActivity() {
         binding.imgSplash.animation = top
         handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000)

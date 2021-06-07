@@ -58,5 +58,19 @@
     <string name="select_and_predict">Pilih dan Scan</string>
     <string name="lihat_hasil_lebih_detail">Lihat Hasil Lebih Detail</string>
     <string name="about_canang">Mengenali jenis canang dan kegunaannya.</string>
-
+    <string name="pendaftaran">Pendaftaran</string>
+    <string name="masukan_nama_depan">masukan nama depan</string>
+    <string name="back_login">Kembali ke Login</string>
+    <string name="register">Daftar</string>
+    <string name="enter_password">masukan password</string>
+    <string name="enter_email">masukan email</string>
+    <string name="enter_tlp">masukan telepon</string>
+    <string name="enter_adress">masukan alamat</string>
+    <string name="enter_age">masukan umur</string>
+    <string name="enter_gender">masukan jenis kelamin</string>
+    <string name="enter_lastname">manusakan nama akhir</string>
+    <string name="pilih_jenis_kelamin">pilih jenis kelamin</string>
+    <string name="desc_regis">Belum punya account? Daftar disini!</string>
+    <string name="login">Masuk</string>
+    <string name="logout">Keluar</string>
 </resources>

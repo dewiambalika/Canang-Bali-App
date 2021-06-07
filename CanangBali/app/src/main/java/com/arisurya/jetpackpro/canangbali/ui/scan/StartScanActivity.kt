@@ -22,23 +22,17 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.arisurya.jetpackpro.canangbali.R
 import com.arisurya.jetpackpro.canangbali.databinding.ActivityStartScanBinding
-import com.arisurya.jetpackpro.canangbali.ml.Model
-import com.arisurya.jetpackpro.canangbali.ui.information.canang.detail.DetailCanangActivity
 import com.arisurya.jetpackpro.canangbali.utils.getFileName
 import com.arisurya.jetpackpro.canangbali.viewmodel.ViewModelFactory
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
+
 
 @Suppress("DEPRECATION")
 class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
