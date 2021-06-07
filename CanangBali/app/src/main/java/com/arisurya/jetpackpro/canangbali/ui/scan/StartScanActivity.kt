@@ -68,7 +68,7 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
                 it.type = "image/*"
                 val mimeTypes = arrayOf("image/jpeg", "image/png")
                 it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-                startActivityForResult(it, 101)
+                startActivityForResult(it, 100)
             }
             setEnableBtnPredict(true)
         })
@@ -85,7 +85,10 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==101){
-            selectedImageUri = data?.data
+            var pic = data?.getParcelableExtra<Bitmap>("data")
+            binding.imageView.setImageBitmap(pic)
+            bitmap = pic!!
+            selectedImageUri = getImageUri(this, bitmap)
             binding.imageView.setImageURI(selectedImageUri)
 
             if(selectedImageUri==null) setEnableBtnPredict(false)
@@ -93,11 +96,8 @@ class StartScanActivity : AppCompatActivity(), UploadRequestBody.UploadCallback 
         }
 
         if(requestCode==100){
-            binding.imageView.setImageURI(data?.data)
-
-            var uri : Uri? = data?.data
-            bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
             selectedImageUri = data?.data
+            binding.imageView.setImageURI(selectedImageUri)
 
             if(selectedImageUri==null) setEnableBtnPredict(false)
             else setEnableBtnPredict(true)
