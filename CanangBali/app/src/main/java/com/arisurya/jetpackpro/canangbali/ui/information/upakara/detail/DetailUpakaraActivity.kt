@@ -27,7 +27,7 @@ class DetailUpakaraActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         detailUpakaraBinding = ActivityDetailUpakaraBinding.inflate(layoutInflater)
         setContentView(detailUpakaraBinding.root)
-        supportActionBar?.title = "Detail Upakara"
+        supportActionBar?.title = "Detail Upacara"
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailUpakaraViewModel::class.java]

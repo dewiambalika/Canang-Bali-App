@@ -15,7 +15,7 @@ class BookmarkUpakaraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBookmarkUpakaraBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.title = "Bookmark Upakara"
+        supportActionBar?.title = "Bookmark Upacara"
 
         val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(this, factory)[BookmarkUpakaraViewModel::class.java]

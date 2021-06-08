@@ -39,9 +39,11 @@ class LoginActivity : AppCompatActivity() {
             showProgressBar(true)
             if (TextUtils.isEmpty(binding.usernameInput.text.toString())) {
                 binding.usernameInput.error = "Please enter username"
+                showProgressBar(false)
                 return@setOnClickListener
             } else if (TextUtils.isEmpty(binding.passwordInput.text.toString())) {
                 binding.usernameInput.error = "Please enter password"
+                showProgressBar(false)
                 return@setOnClickListener
             }
             auth.signInWithEmailAndPassword(
