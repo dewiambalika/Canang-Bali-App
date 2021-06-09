@@ -28,3 +28,11 @@ $ sudo python3 main.py
 $ sudo python3 main.py &
 ```
 after finished the deployment on ssh, we can use the external ip as an API and pass it to the android team
+
+# Android path
+To use damage detection feature, we use the server's URL that we got from Cloud Computing team. If you want to use our android source code, you can setup your own server instead of using our server (exclude the Bangkit 2021 Program evaluation team). Beside that we also use Firebase on our application backend.
+You can find the APK on this link: https://github.com/WML-Team/Canang-Bali-App/tree/main/CanangBali/app/release
+The following features that we used on our Android Deployment are:
+* Firebase
+* POST image to Cloud Server
+* GET the response from Cloud Server
